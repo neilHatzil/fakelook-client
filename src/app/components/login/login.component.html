@@ -1,19 +1,32 @@
-<head>
-    <title>Login/Sign Up Form</title>
-  </head>
-  <body>
-    <div>
-      <div >
-          <h1>Login</h1>
-          <div>
-            <label>Username: </label>
-            <input type="text" name="username" id="username" maxlength="20" required> 
-          </div>
-          <div >
-            <label >Password: </label>
-            <input type="password" name="pass" id="pass" maxlength="20" required> 
-          </div>
-          <div>
-            <button type="submit" (click)="login()">Submit</button>
-          </div>
-      </div>
+<div class="display-center full-width">
+  <form class="signing-box" [formGroup]="loginForm" (ngSubmit)="submitPost()">
+    <div class="display-center">
+      <h2>Login</h2>
+    </div>
+    <label for="firstName">First Name</label>
+    <input formControlName="userName" type="text" id="userName" />
+    <div class="error" *ngIf="
+          loginForm.controls['userName'].touched &&
+          loginForm.controls['userName'].invalid
+        ">
+      username not valid
+    </div>
+
+    <label for="password">Password</label>
+    <input formControlName="password" type="password" id="password" />
+    <div class="error" *ngIf="
+          loginForm.controls['password'].touched &&
+          loginForm.controls['password'].invalid
+        ">
+      password not valid
+    </div>
+    <div class="display-center">
+      <a [routerLink]="['/SignUp']">SignUp</a>
+    </div>
+    <div class="display-center">
+      <button type="submit" class="btn" [disabled]="!loginForm.valid">
+        Login
+      </button>
+    </div>
+  </form>
+</div>

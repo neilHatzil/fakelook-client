@@ -1,0 +1,34 @@
+<div class="display-center full-width">
+    <form class="signing-box" [formGroup]="PostForm" (ngSubmit)="submitPost()">
+      <div class="display-center"><h2>Add post</h2></div>
+    
+      <label for="text">Text</label>
+      <input formControlName="text" type="text" id="text" />
+      <div
+        class="error"
+        *ngIf="
+        PostForm.controls['text'].touched &&
+        PostForm.controls['text'].invalid
+        "
+      >
+      Text not valid
+      </div>
+      
+      <label for="image">Image</label>
+      <input formControlName="image" type="text" id="image" />
+      <div
+        class="error"
+        *ngIf="
+        PostForm.controls['image'].touched &&
+        PostForm.controls['image'].invalid
+        "
+      >
+      Image not valid
+      </div>
+
+      <div class="display-center">
+        <a [routerLink]="['/Home']">Post</a>
+      </div>
+    </form>
+  </div>
+  

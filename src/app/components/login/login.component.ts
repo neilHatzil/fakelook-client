@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import IUser from 'src/app/models/users/users';
-import { LoginService } from 'src/app/services/login.service';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
+import IUser from 'src/app/models/users';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-login',
@@ -8,22 +9,23 @@ import { LoginService } from 'src/app/services/login.service';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
-userList: IUser[]=[];
-  constructor(private loginService: LoginService) { }
+  userList: IUser[] = [];
+  constructor(private authService: AuthService) { }
+  loginForm = new FormGroup({
+    userName: new FormControl('', [
+      Validators.required,
+      Validators.minLength(2),
+    ]),
+    password: new FormControl('', [
+      Validators.required,
+      Validators.minLength(4),
+    ]),
+  });
 
-  getUsers() {
-    this.loginService.getUsers()
-      .subscribe((users) => this.userList = users,
-        (error) => console.log(error));
-        
-  }
-
-  login(){
-console.log(this.userList);
-
+  submitPost(): void {
+    const user: IUser = this.loginForm.value;
+   this.authService.login(user);
   }
   ngOnInit(): void {
-    this.getUsers();
   }
-
 }

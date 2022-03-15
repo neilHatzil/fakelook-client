@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import IUser from 'src/app/models/users/users';
-import { AuthService } from 'src/app/services/auth.service';
+import IUser from 'src/app/models/users';
+  import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-sign-up',
@@ -9,6 +9,7 @@ import { AuthService } from 'src/app/services/auth.service';
   styleUrls: ['./sign-up.component.css']
 })
 export class SignUpComponent implements OnInit {
+  @Output() newItemEvent = new EventEmitter<String>();
   constructor(private authService: AuthService) {}
   signUpForm = new FormGroup({
     firstName: new FormControl('', [
@@ -50,7 +51,7 @@ export class SignUpComponent implements OnInit {
       age:String(this.signUpForm.controls['age'].value),
       workplace:this.signUpForm.controls['workPlace'].value,
     };
-    console.log(user);
+    //this.newItemEvent.emit(user.name);
     this.authService.signUp(user);
   }
 }
