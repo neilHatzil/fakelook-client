@@ -15,7 +15,18 @@ export class SignUpComponent implements OnInit {
       Validators.required,
       Validators.minLength(2),
     ]),
-    lastName: new FormControl('', [
+    userName: new FormControl('', [
+      Validators.required,
+      Validators.minLength(2),
+    ]),
+    age: new FormControl('', [
+      Validators.required,
+    ]),
+    address: new FormControl('', [
+      Validators.required,
+      Validators.minLength(2),
+    ]),
+    workPlace: new FormControl('', [
       Validators.required,
       Validators.minLength(2),
     ]),
@@ -28,7 +39,19 @@ export class SignUpComponent implements OnInit {
   ngOnInit(): void {}
   submitPost(): void {
     
-    const user: IUser = this.signUpForm.value;
+    //const name= this.signUpForm.controls['firstName'].value
+    //const user: IUser = this.signUpForm.value;
+
+    const user: IUser = {
+      id:0,
+      username:this.signUpForm.controls['userName'].value,
+      name: this.signUpForm.controls['firstName'].value,
+      password:this.signUpForm.controls['password'].value,
+      address:this.signUpForm.controls['address'].value,
+      age:this.signUpForm.controls['age'].value,
+      workplace:this.signUpForm.controls['workPlace'].value,
+    };
+    console.log(user);
     this.authService.signUp(user);
   }
 }

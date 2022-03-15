@@ -1,28 +1,19 @@
 <div class="display-center full-width">
     <form class="signing-box" [formGroup]="signUpForm" (ngSubmit)="submitPost()">
       <div class="display-center"><h2>Sign Up</h2></div>
-      <label for="firstName">First Name</label>
-      <input formControlName="firstName" type="text" id="firstName" />
+    
+      <label for="userName">User Name</label>
+      <input formControlName="userName" type="text" id="userName" />
       <div
         class="error"
         *ngIf="
-          signUpForm.controls['firstName'].touched &&
-          signUpForm.controls['firstName'].invalid
+          signUpForm.controls['userName'].touched &&
+          signUpForm.controls['userName'].invalid
         "
       >
-        first name not valid
+        User name not valid
       </div>
-      <label for="lastName">Last Name</label>
-      <input formControlName="lastName" type="text" id="lastName" />
-      <div
-        class="error"
-        *ngIf="
-          signUpForm.controls['lastName'].touched &&
-          signUpForm.controls['lastName'].invalid
-        "
-      >
-        last name not valid
-      </div>
+
       <label for="password">Password</label>
       <input formControlName="password" type="password" id="password" />
       <div
@@ -34,6 +25,56 @@
       >
         password not valid
       </div>
+      
+      <label for="firstName">First Name</label>
+      <input formControlName="firstName" type="text" id="firstName" />
+      <div
+        class="error"
+        *ngIf="
+          signUpForm.controls['firstName'].touched &&
+          signUpForm.controls['firstName'].invalid
+        "
+      >
+        first name not valid
+      </div>
+
+      <label for="age">Age</label>
+      <input formControlName="age" type="number" id="age" />
+      <div
+        class="error"
+        *ngIf="
+          signUpForm.controls['age'].touched &&
+          signUpForm.controls['age'].invalid
+        "
+      >
+        age not valid
+      </div>
+
+      <label for="address">Address</label>
+      <input formControlName="address" type="text" id="address" />
+      <div
+        class="error"
+        *ngIf="
+          signUpForm.controls['address'].touched &&
+          signUpForm.controls['address'].invalid
+        "
+      >
+        address not valid
+      </div>
+
+      <label for="workPlace">Workplace</label>
+      <input formControlName="workPlace" type="text" id="workPlace" />
+      <div
+        class="error"
+        *ngIf="
+          signUpForm.controls['workPlace'].touched &&
+          signUpForm.controls['workPlace'].invalid
+        "
+      >
+        Workplace not valid
+      </div>
+
+    
       <div class="display-center">
         <a [routerLink]="['/Login']">Login</a>
       </div>
