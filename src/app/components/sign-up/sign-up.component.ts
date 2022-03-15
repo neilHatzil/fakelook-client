@@ -43,12 +43,11 @@ export class SignUpComponent implements OnInit {
     //const user: IUser = this.signUpForm.value;
 
     const user: IUser = {
-      id:0,
       username:this.signUpForm.controls['userName'].value,
       name: this.signUpForm.controls['firstName'].value,
       password:this.signUpForm.controls['password'].value,
       address:this.signUpForm.controls['address'].value,
-      age:this.signUpForm.controls['age'].value,
+      age:String(this.signUpForm.controls['age'].value),
       workplace:this.signUpForm.controls['workPlace'].value,
     };
     console.log(user);
