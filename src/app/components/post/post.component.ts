@@ -40,7 +40,6 @@ export class PostComponent implements OnInit {
       this.tags= this.tags+ ", " +this.post.tags[i].content
     }
   }
-
   expandPost() {
     this.isExtended = !this.isExtended;
   }

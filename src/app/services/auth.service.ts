@@ -51,6 +51,18 @@ export class AuthService {
     return user;
   }
 
+  userFromName(username: string): Observable<IUser> {
+    const currentUrl = `${this.url}/api/User/${username}`;
+
+    const headers = new HttpHeaders({
+      Authorization: 'Bearer ' + this.getToken(),
+    });
+    return this.http.get<IUser>(currentUrl,{ headers });
+  }
+
+
+  
+
   constructor(private http: HttpClient, private router: Router) { }
 
   checkAccess(): Observable<boolean> {

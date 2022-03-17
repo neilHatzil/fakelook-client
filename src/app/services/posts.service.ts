@@ -36,5 +36,4 @@ export class PostsService {
       });
       return this.http.get<IPost[]>(currentUrl,{ headers });
     }
-  
  }

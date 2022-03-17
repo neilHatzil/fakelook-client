@@ -6,6 +6,7 @@ import IComment from "src/app/models/comments";
 import IUser from 'src/app/models/users';
 import ITag from 'src/app/models/tags';
 import { PostsService } from 'src/app/services/posts.service';
+import IUserTag from 'src/app/models/userTags';
 
 @Component({
   selector: 'app-add-post',
@@ -13,7 +14,7 @@ import { PostsService } from 'src/app/services/posts.service';
   styleUrls: ['./add-post.component.css']
 })
 export class AddPostComponent implements OnInit {
-  constructor(private authService: AuthService, private postService:PostsService) { }
+  constructor(private authService: AuthService, private postService: PostsService) { }
 
   PostForm = new FormGroup({
     description: new FormControl('', [
@@ -45,23 +46,32 @@ export class AddPostComponent implements OnInit {
       z_Position: 0,
       date: new Date(),
       comments: [],
-      likes:[],
-      user:this.authService.getUser(),
-      userId:this.authService.getUser().id,
-      tags:this.tagSetup(),
-      userTaggedPost:[]
+      likes: [],
+      user: this.authService.getUser(),
+      userId: this.authService.getUser().id,
+      tags: this.tagSetup(),
+      userTaggedPost: this.userSetup(),
     };
-this.postService.makePost(post);
+    this.postService.makePost(post);
   }
 
-  tagSetup():ITag[] {
+  tagSetup(): ITag[] {
     let tagArray: string[] = this.PostForm.controls['tags'].value.split(" ");
     let returnArray: ITag[] = [];
     for (let i = 0; i < tagArray.length; i++) {
-      returnArray[i]={id:String(i),content:tagArray[i]};
+      returnArray[i] = { id: String(i), content: tagArray[i] };
+    }
+    return returnArray;
+  }
+
+  userSetup(): IUserTag[] {
+    let tagArray: string[] = this.PostForm.controls['userTags'].value.split(" ");
+    let returnArray: IUserTag[] = [];
+    let taggedUser: IUser | null = null;
+    for (let i = 0; i < tagArray.length; i++) {
+      returnArray[i] = { id: String(i), user: tagArray[i], userId: "", postId: "", Post: null };
     }
     console.log(returnArray);
     return returnArray;
-
   }
 }

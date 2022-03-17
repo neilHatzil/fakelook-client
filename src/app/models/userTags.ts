@@ -5,5 +5,5 @@ export default interface IUserTag {
     user:string;
     userId:string;
     postId:string;
-    Post:IPost;
+    Post:IPost|null;
 }
