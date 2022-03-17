@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import IPost from 'src/app/models/posts';
 import IUser from 'src/app/models/users';
 import { AuthService } from 'src/app/services/auth.service';
 
@@ -9,7 +10,7 @@ import { AuthService } from 'src/app/services/auth.service';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
-  userList: IUser[] = [];
+  postList: IPost[] = [];
   constructor(private authService: AuthService) { }
   loginForm = new FormGroup({
     userName: new FormControl('', [
@@ -28,4 +29,6 @@ export class LoginComponent implements OnInit {
   }
   ngOnInit(): void {
   }
+
+  
 }

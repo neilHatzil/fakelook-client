@@ -1,4 +1,4 @@
-export default interface IComment {
+export default interface ITag {
     id:string;
     content:string;
 }

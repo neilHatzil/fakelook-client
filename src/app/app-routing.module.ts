@@ -14,7 +14,7 @@ const routes: Routes = [
   {
     path: `Home`,
     component: HomeComponent,
-    //canActivate: [GuardianGuard],
+    canActivate: [GuardianGuard],
     children: [
       {
         path: 'Map',
@@ -32,8 +32,8 @@ const routes: Routes = [
   },
   { path: `SignUp`, component: SignUpComponent },
   { path: `Login`, component: LoginComponent },
-  { path: ``, component: HomeComponent },
-  { path: `**`, component: HomeComponent },];
+  { path: ``, component: LoginComponent },
+  { path: `**`, component: LoginComponent }];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],

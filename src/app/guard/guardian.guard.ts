@@ -21,7 +21,7 @@ export class GuardianGuard implements CanActivate {
     return this.authService.checkAccess().pipe(
       map((res) => {
         if (!res) {
-          return this.router.parseUrl('/Home');
+          return this.router.parseUrl('/Login');
         } else {
           return res;
         }

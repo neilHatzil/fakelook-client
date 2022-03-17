@@ -3,12 +3,12 @@
       <div class="display-center"><h2>Add post</h2></div>
     
       <label for="text">Text</label>
-      <input formControlName="text" type="text" id="text" />
+      <input formControlName="description" type="text" id="text" />
       <div
         class="error"
         *ngIf="
-        PostForm.controls['text'].touched &&
-        PostForm.controls['text'].invalid
+        PostForm.controls['description'].touched &&
+        PostForm.controls['description'].invalid
         "
       >
       Text not valid
@@ -26,8 +26,33 @@
       Image not valid
       </div>
 
+      <label for="image">Add tags (seperated by spaces)</label>
+      <input formControlName="tags" type="text" id="image" />
+      <div
+        class="error"
+        *ngIf="
+        PostForm.controls['tags'].touched &&
+        PostForm.controls['tags'].invalid
+        "
+      >
+      Tags not valid
+      </div>
+
+      <label for="image">Tag users (seperated by spaces)</label>
+      <input formControlName="userTags" type="text" id="image" />
+      <div
+        class="error"
+        *ngIf="
+        PostForm.controls['userTags'].touched &&
+        PostForm.controls['userTags'].invalid
+        "
+      >
+      User tag not valid
+      </div>
       <div class="display-center">
-        <a [routerLink]="['/Home']">Post</a>
+        <button type="submit" class="btn" [disabled]="!PostForm.valid">
+          Post
+        </button>
       </div>
     </form>
   </div>

@@ -3,7 +3,9 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from 'src/app/services/auth.service';
 import IPost from 'src/app/models/posts';
 import IComment from "src/app/models/comments";
-
+import IUser from 'src/app/models/users';
+import ITag from 'src/app/models/tags';
+import { PostsService } from 'src/app/services/posts.service';
 
 @Component({
   selector: 'app-add-post',
@@ -11,32 +13,24 @@ import IComment from "src/app/models/comments";
   styleUrls: ['./add-post.component.css']
 })
 export class AddPostComponent implements OnInit {
-  constructor(private authService: AuthService) { }
+  constructor(private authService: AuthService, private postService:PostsService) { }
 
   PostForm = new FormGroup({
-    id: new FormControl('', [
-      Validators.required,
-      Validators.minLength(2),
-    ]),
-    text: new FormControl('', [
+    description: new FormControl('', [
       Validators.required,
       Validators.minLength(2),
     ]),
     image: new FormControl('', [
       Validators.required,
     ]),
-    location: new FormControl('', [
+    tags: new FormControl('', [
       Validators.required,
       Validators.minLength(2),
     ]),
-    date: new FormControl('', [
+    userTags: new FormControl('', [
       Validators.required,
       Validators.minLength(2),
     ]),
-    isliked: new FormControl('', [
-      Validators.required,
-      Validators.minLength(4),
-    ])
   });
 
   ngOnInit(): void { }
@@ -44,15 +38,30 @@ export class AddPostComponent implements OnInit {
   submitPost(): void {
     const post: IPost = {
       id: "",
-      text: this.PostForm.controls['text'].value,
-      image: this.PostForm.controls['image'].value,
-      location: { x: 0, y: 0, z: 0 },
+      description: this.PostForm.controls['description'].value,
+      imageSorce: this.PostForm.controls['image'].value,
+      x_Position: 0,
+      y_Position: 0,
+      z_Position: 0,
       date: new Date(),
-      isLiked: false,
-      comments: []
+      comments: [],
+      likes:[],
+      user:this.authService.getUser(),
+      userId:this.authService.getUser().id,
+      tags:this.tagSetup(),
+      userTaggedPost:[]
     };
-    console.log(post);
-    //this.authService.signUp(user);
+this.postService.makePost(post);
+  }
+
+  tagSetup():ITag[] {
+    let tagArray: string[] = this.PostForm.controls['tags'].value.split(" ");
+    let returnArray: ITag[] = [];
+    for (let i = 0; i < tagArray.length; i++) {
+      returnArray[i]={id:String(i),content:tagArray[i]};
+    }
+    console.log(returnArray);
+    return returnArray;
+
   }
 }
-//User/<username> to get id

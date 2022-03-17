@@ -12,6 +12,7 @@ import { HomeComponent } from './components/home/home.component';
 import { MapComponent } from './components/map/map.component';
 import { TimelineComponent } from './components/timeline/timeline.component';
 import { AddPostComponent } from './components/add-post/add-post.component';
+import { PostComponent } from './components/post/post.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import { AddPostComponent } from './components/add-post/add-post.component';
     HomeComponent,
     MapComponent,
     TimelineComponent,
-    AddPostComponent
+    AddPostComponent,
+    PostComponent
   ],
   imports: [
     BrowserModule,

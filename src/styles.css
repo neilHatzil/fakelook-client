@@ -24,7 +24,7 @@
     background-color: rgb(14, 122, 223);
   }
   .btn:disabled {
-    background-color: rgb(191, 197, 202);
+    background-color: rgb(197, 202, 191);
   }
   
   input ,select{
@@ -41,7 +41,7 @@
     width: 100vw;
   }
   .error {
-    color: red;
+    color: rgb(3, 1, 1);
   }
   .error::before {
     content: "🚫";

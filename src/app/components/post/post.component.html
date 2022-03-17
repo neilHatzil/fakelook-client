@@ -1,0 +1,27 @@
+<div class="full-width">
+    <div class="signing-box">
+        <h3 class="displayed-center">a post:</h3>
+        <div class="post-flex">
+            <div>
+                <img class="post-image"
+                    src={{post.imageSorce}}>
+            </div>
+            <div class="post-text">{{post.description}}</div>
+
+        </div>
+        <button class="post-item" (click)="expandPost()" >expand</button>
+        <button class="post-item" >like</button>
+        <div class="post-text-bg" *ngIf="isExtended">
+            <textarea class= "textarea-tag" disabled resize="none;">tags: {{tags}}</textarea>
+            <textarea class= "textarea-tag" disabled resize="none;">tagged: {{tags}}</textarea>
+            <textarea class= "textarea-comment" disabled resize="none;">commments: {{comments}}</textarea>
+            <textarea class= "textarea-tag" disabled resize="none;">likes: {{likeAmount}}</textarea>
+
+
+
+        </div>
+
+    </div>
+    <div class="display-center">
+    </div>
+</div>
