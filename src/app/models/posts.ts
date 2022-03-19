@@ -4,17 +4,17 @@ import IUser from "./users";
 import IUserTag from "./userTags";
 
 export default interface IPost {
-    id:string; //no
+    id:number;
     description: string;
     imageSorce:string;
-    x_Position: number;
-    y_Position: number;
-    z_Position: number;
+    x_position: number;
+    y_position: number;
+    z_position: number;
     date:Date;
-    likes:any[];
-    user:IUser|null;
+    likes?:any[]|null; //trying with null
+    user?:IUser|null;
     userId:string;
-    comments:IComment[];
-    tags:ITag[];
-    userTaggedPost:IUserTag[];
+    comments:IComment[]; //trying with null
+    tags?:ITag[]|null; //trying with null
+    userTaggedPost?:IUserTag[];
 }

@@ -23,12 +23,13 @@ export class PostsService {
   makePost(post: IPost): void {
     const currentUrl = `${this.url}Post/AddPost`;
     this.subs.push(
-      this.http.post<any>(currentUrl, post).subscribe((res) => {
+      this.http.post<any>(currentUrl,post).subscribe(() => {
         this.router.navigateByUrl('/Home');
       })
     );
   }
-    getAllPosts(): Observable<IPost[]> {
+
+  getAllPosts(): Observable<IPost[]> {
       const currentUrl = `${this.url}Post/GetAllPosts`;
   
       const headers = new HttpHeaders({

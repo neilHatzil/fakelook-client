@@ -14,7 +14,8 @@
         <div class="post-text-bg" *ngIf="isExtended">
             <textarea class= "textarea-tag" disabled resize="none;">tags: {{tags}}</textarea>
             <textarea class= "textarea-tag" disabled resize="none;">tagged: {{tags}}</textarea>
-            <textarea class= "textarea-comment" disabled resize="none;">commments: {{comments}}</textarea>
+            <app-comment *ngFor="let comment of post.comments ; index as i" [comment]="post.comments[i]">
+            </app-comment>
             <textarea class= "textarea-tag" disabled resize="none;">likes: {{likeAmount}}</textarea>
 
 

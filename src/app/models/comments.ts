@@ -1,4 +1,7 @@
+import IUser from "./users";
+
 export default interface IComment {
-    id:string;
+    //id:string;
     content:string;
+    user:IUser;
 }

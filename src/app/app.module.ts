@@ -13,6 +13,7 @@ import { MapComponent } from './components/map/map.component';
 import { TimelineComponent } from './components/timeline/timeline.component';
 import { AddPostComponent } from './components/add-post/add-post.component';
 import { PostComponent } from './components/post/post.component';
+import { CommentComponent } from './components/comment/comment.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import { PostComponent } from './components/post/post.component';
     MapComponent,
     TimelineComponent,
     AddPostComponent,
-    PostComponent
+    PostComponent,
+    CommentComponent
   ],
   imports: [
     BrowserModule,

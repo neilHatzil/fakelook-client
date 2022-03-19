@@ -18,7 +18,6 @@ posts:IPost[]=[];
   getposts(){
     this.postService.getAllPosts().subscribe((result)=>{
       this.posts=result;
-
     })
   }
 

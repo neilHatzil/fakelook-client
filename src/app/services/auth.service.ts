@@ -20,7 +20,7 @@ export class AuthService {
       this.http.post<any>(currentUrl, user).subscribe((res) => {
         this.setToken(res.token);
         this.setUser(res.user);
-        this.router.navigateByUrl('/Home');
+        this.router.navigateByUrl('/Home/Timeline');
         
       })
     );
@@ -45,7 +45,6 @@ export class AuthService {
   private setUser(user: IUser): void {
     sessionStorage.setItem('user', JSON.stringify(user));
   }
-
   public getUser(): IUser {
     var user:IUser=JSON.parse(sessionStorage.getItem('user')||"");
     return user;
@@ -59,9 +58,6 @@ export class AuthService {
     });
     return this.http.get<IUser>(currentUrl,{ headers });
   }
-
-
-  
 
   constructor(private http: HttpClient, private router: Router) { }
 
