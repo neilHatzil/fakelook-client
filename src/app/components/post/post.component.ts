@@ -2,6 +2,8 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Router } from '@angular/router';
 import IComment from 'src/app/models/comments';
 import IPost from 'src/app/models/posts';
+import ITag from 'src/app/models/tags';
+import IUserTag from 'src/app/models/userTags';
 import { AuthService } from 'src/app/services/auth.service';
 import { PostsService } from 'src/app/services/posts.service';
 
@@ -16,12 +18,18 @@ export class PostComponent implements OnInit {
   //used to show extended information
   isExtended: boolean = false;
 
+  //show and hide inputs for editing
+  editing: boolean = false;
+
+  //show edit button (if user is the poster)
+  editButton: boolean = false;
+
   userliked: boolean = false;
   likeAmount: number = 0;
 
   //used to edit tags and user tags
   tagString: string = "";
-  userTagString:string="";
+  userTagString: string = "";
 
   //used to convert tag model to string for display
   tags: string = "";
@@ -29,12 +37,10 @@ export class PostComponent implements OnInit {
   //used to convert userTag model to string for display
   userTags: string = "";
 
-
-  //show edit button (if user is the poster)
-  editButton: boolean = false;
-
-  //show and hide inputs for editing
-  editing: boolean = false;
+  //used for creating comments:
+  comment:string="";
+  commentTags:string="";
+  commentUserTags:string="";
 
   @Input() post: IPost = {
     id: 0,
@@ -42,7 +48,7 @@ export class PostComponent implements OnInit {
     imageSorce: "temp",
     x_position: 0, y_position: 0, z_position: 0,
     date: new Date(),
-    comments: [{id:0, content: "", user: { id: "0", username: "temp", password: "temp", name: "temp", address: "temp", age: "temp", workplace: "temp", comments: [], posts: [], likes: [], userTaggedPost: [] },tags:[],userTaggedComment:[] }],
+    comments: [{ id: 0, content: "", user: { id: "0", username: "temp", password: "temp", name: "temp", address: "temp", age: "temp", workplace: "temp", comments: [], posts: [], likes: [], userTaggedPost: [] }, tags: [], userTaggedComment: [] }],
     likes: null,
     user: null,
     userId: "avi",
@@ -60,14 +66,40 @@ export class PostComponent implements OnInit {
   }
 
   editPost() {
-    if(this.editing==true){
-      this.postService.editPost(this.post,this.userTags.split(" "));
+    this.editing = !this.editing;
+  }
+
+  applyChanges() {
+    if (this.editing == true) {
+
+      //setting up tags:
+      let temparrayTags = this.tagString.split(" ");
+      for (let i = 0; i < temparrayTags.length; i++) {
+        if (this.post.tags != null) {
+          this.post.tags[i]={content:temparrayTags[i]};
+        }
+      }
+
+      //setting up usertags:
+      let temparrayUserTags = this.userTagString.split(" ");
+      for (let i = 0; i < temparrayUserTags.length; i++) {
+        if (this.post.userTaggedPost != null) {
+          this.post.userTaggedPost[i] =
+          {
+            user: {
+              id: "0", username: temparrayUserTags[i], password: "", name: temparrayUserTags[i],
+              address: "", age: "1", workplace: "", comments: null, posts: null, likes: null,
+              userTaggedPost: null
+            },
+            userId: null, postId: null, Post: null
+          }
+        }
+      }
+      this.postService.editPost(this.post, this.userTags.split(" "));
       console.error("the error below occurs because editPost is not working yet- post 405 (postcomp)");
       this.refreshFeed();
     }
-    this.editing=!this.editing;
   }
-
   //adds edit button to posts made by the user
   addEditButton() {
     if (this.post.userId == this.authService.getUser().id) {
@@ -94,9 +126,9 @@ export class PostComponent implements OnInit {
   setupTags() {
     if (this.post.tags != null) {
       for (let i = 0; i < this.post.tags.length; i++) {
-        this.tags = this.tags  + this.post.tags[i].content+ ", ";
+        this.tags = this.tags + this.post.tags[i].content + ", ";
       }
-      this.tagString=this.tags.replace(/,/g, '');
+      this.tagString = this.tags.replace(/,/g, '');
     }
     else {
       this.tags = "empty";
@@ -111,7 +143,7 @@ export class PostComponent implements OnInit {
         //console.log(this.post.userTaggedPost[i].user);
         this.userTags = this.userTags + ", " + this.post.userTaggedPost[i].user;
       }
-      this.userTagString=this.userTags;
+      this.userTagString = this.userTags;
     }
     else {
       this.userTags = "empty";
@@ -135,11 +167,51 @@ export class PostComponent implements OnInit {
     this.postService.likeUnlike(Number(this.post.id), parseInt(this.authService.getUser().id));
   }
 
-  addComment(){
-    //this.postService.makeComment();
+  addComment() {
+  //comment:string="";
+  //commentTags:string="";
+  //commentUserTags:string="";
+  const commentToSend: IComment={
+    content:this.comment,
+    userId:Number(this.authService.getUser().id),
+    postId:this.post.id,
+    id:0,
+    user:{
+      id: "0", username: "temp", password: "", name: "temp",
+      address: "", age: "1", workplace: "", comments: null, posts: null, likes: null,
+      userTaggedPost: null
+    },
+    tags:[],
+    userTaggedComment:[]    
+  }
+    //setting up tags:
+    let temparrayTags = this.commentTags.split(" ");
+    for (let i = 0; i < temparrayTags.length; i++) {
+      if (commentToSend.tags != null) {
+        commentToSend.tags[i]={content:temparrayTags[i]};
+      }
+    }
+
+    //setting up usertags:
+    let temparrayUserTags = this.commentUserTags.split(" ");
+    for (let i = 0; i < temparrayUserTags.length; i++) {
+      if (commentToSend.userTaggedComment != null) {
+        commentToSend.userTaggedComment[i] =
+        {
+          user: {
+            id: "0", username: temparrayUserTags[i], password: "", name: temparrayUserTags[i],
+            address: "", age: "1", workplace: "", comments: null, posts: null, likes: null,
+            userTaggedPost: null
+          },
+          userId: null, postId: null, Post: null
+        }
+      }
+    }
+
+    this.postService.makeComment(commentToSend);
   }
 
-  refreshFeed(){
+  refreshFeed() {
     this.reloadPostsEvent.emit();
   }
 }

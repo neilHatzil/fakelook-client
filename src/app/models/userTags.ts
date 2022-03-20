@@ -4,7 +4,7 @@ import IUser from "./users";
 export default interface IUserTag {
     //id:string;
     user:IUser;
-    userId:number;
-    postId:number;
+    userId:number|null;
+    postId:number|null;
     Post:IPost|null;
 }

@@ -1,5 +1,5 @@
 .signing-box{
-  margin-top: 10vh;
+  margin-top: 5vh;
   border: 0.25em solid linear-gradient(140deg, rgb(255, 0, 179),rgb(255, 72, 0), red);
   border-radius: 0.25em;
   width: 50vw;
@@ -15,7 +15,6 @@
 .display-center {
     justify-content: center;
     display: flex;
-    padding: 0.5em 0em;
   }
   .btn {
     border-radius: 0.25em;
@@ -34,7 +33,6 @@
     box-sizing: border-box;
     width: 100%;
     padding: 12px 20px;
-    margin: 4px 0;
   }
   
   .full-width {

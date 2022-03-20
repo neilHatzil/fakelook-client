@@ -13,27 +13,31 @@
             <button class="post-item" (click)="editPost()">Edit</button>
         </span>
         <button class="post-item" (click)="likeUnlike()">Like</button>
-        <span *ngIf="!editing">
-            <button class="post-item" (click)="addComment()">Comment</button>
-        </span>
         <div class="post-text-bg" *ngIf="isExtended">
+            <textarea class="textarea-tag" disabled resize="none;">likes: {{likeAmount}}</textarea>
             <span *ngIf="!editing">
                 <textarea class="textarea-tag" disabled resize="none;">tags: {{tags}}</textarea>
                 <textarea class="textarea-tag" disabled resize="none;">tagged: {{userTags}}</textarea>
             </span>
             <span *ngIf="editing">
                 <textarea class="textarea-tag" disabled resize="none;">tags:</textarea> <input [ngModel]="tagString">
-                <textarea class="textarea-tag" disabled resize="none;">tagged:</textarea> <input [ngModel]="userTagString">
+                <textarea class="textarea-tag" disabled resize="none;">tagged:</textarea> <input
+                    [ngModel]="userTagString">
+                <button class="post-item" (click)="applyChanges()">Apply</button>
             </span>
             <app-comment *ngFor="let comment of post.comments ; index as i" [comment]="post.comments[i]">
             </app-comment>
-            <textarea class="textarea-tag" disabled resize="none;">likes: {{likeAmount}}</textarea>
-
-
-
         </div>
-
-    </div>
-    <div class="display-center">
+        <span *ngIf="isExtended">
+        <span *ngIf="!editing">
+            <div class="comment-box">
+            <textarea class="textarea-tag" disabled resize="none;">comment:</textarea> <input [ngModel]="comment">
+            <textarea class="textarea-tag" disabled resize="none;">tags:</textarea> <input [ngModel]="commentTags">
+            <textarea class="textarea-tag" disabled resize="none;">tagged:</textarea> <input [ngModel]="commentUserTags">
+            <button class="post-item" (click)="addComment()">Comment</button>
+        </div>
+        </span>
+        </span>
     </div>
 </div>
+
