@@ -1,4 +1,5 @@
 import IComment from "./comments";
+import ILike from "./likes";
 import ITag from "./tags";
 import IUser from "./users";
 import IUserTag from "./userTags";
@@ -11,10 +12,10 @@ export default interface IPost {
     y_position: number;
     z_position: number;
     date:Date;
-    likes?:any[]|null; //trying with null
+    likes?:ILike[]|null; //trying with null
     user?:IUser|null;
     userId:string;
     comments:IComment[]; //trying with null
     tags?:ITag[]|null; //trying with null
-    userTaggedPost?:IUserTag[];
+    userTaggedPost?:IUserTag[]|null;
 }

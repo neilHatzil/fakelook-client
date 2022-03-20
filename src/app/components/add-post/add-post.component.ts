@@ -14,7 +14,9 @@ import IUserTag from 'src/app/models/userTags';
   styleUrls: ['./add-post.component.css']
 })
 export class AddPostComponent implements OnInit {
+  
   constructor(private authService: AuthService, private postService: PostsService) { }
+  userTags:string[]=[];
   PostForm = new FormGroup({
     description: new FormControl('', [
       Validators.required,
@@ -33,10 +35,11 @@ export class AddPostComponent implements OnInit {
     ]),
   });
 
-  ngOnInit(): void { }
+  ngOnInit(): void {
+
+   }
 
   submitPost(): void {
-    
     const post: IPost = {
       id: 0,
       description: this.PostForm.controls['description'].value,
@@ -49,10 +52,10 @@ export class AddPostComponent implements OnInit {
       //likes: null,
       //user: this.authService.getUser(),
       userId: this.authService.getUser().id,
-      tags: this.tagSetup(), //this.tagSetup()
-      userTaggedPost: []
+      tags: [], //this.tagSetup()
+      userTaggedPost: this.userTagSetup()
     };
-    this.postService.makePost(post);
+    this.postService.makePost(post,this.userTags);
   }
 
   tagSetup(): ITag[] {
@@ -64,13 +67,13 @@ export class AddPostComponent implements OnInit {
     return returnArray;
   }
 
-  userSetup(): IUserTag[] {
-    let tagArray: string[] = this.PostForm.controls['userTags'].value.split(" ");
+  userTagSetup():IUserTag[] {
+    let userTagArray: string[] = this.PostForm.controls['userTags'].value.split(" ");
     let returnArray: IUserTag[] = [];
-    let taggedUser: IUser | null = null;
-    for (let i = 0; i < tagArray.length; i++) {
-      //returnArray[i] = { id: String(i), user: tagArray[i], userId: "", postId: "", Post: null };
+    for (let i = 0; i < userTagArray.length; i++) {
+      returnArray[i] = { user:{ id: "0", username:userTagArray[i], password: "temp", name: "temp", address: "temp", age: "temp", workplace: "temp", comments: [], posts: [], likes: [], userTaggedPost: []},userId:0,postId:0,Post:null};
     }
     return returnArray;
   }
+  
 }

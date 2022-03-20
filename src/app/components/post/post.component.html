@@ -3,20 +3,31 @@
         <h3 class="displayed-center">a post:</h3>
         <div class="post-flex">
             <div>
-                <img class="post-image"
-                    src={{post.imageSorce}}>
+                <img class="post-image" src={{post.imageSorce}}>
             </div>
             <div class="post-text">{{post.description}}</div>
 
         </div>
-        <button class="post-item" (click)="expandPost()" >expand</button>
-        <button class="post-item" >like</button>
+        <button class="post-item" (click)="expandPost()">Expand</button>
+        <span *ngIf="editButton">
+            <button class="post-item" (click)="editPost()">Edit</button>
+        </span>
+        <button class="post-item" (click)="likeUnlike()">Like</button>
+        <span *ngIf="!editing">
+            <button class="post-item" (click)="addComment()">Comment</button>
+        </span>
         <div class="post-text-bg" *ngIf="isExtended">
-            <textarea class= "textarea-tag" disabled resize="none;">tags: {{tags}}</textarea>
-            <textarea class= "textarea-tag" disabled resize="none;">tagged: {{tags}}</textarea>
+            <span *ngIf="!editing">
+                <textarea class="textarea-tag" disabled resize="none;">tags: {{tags}}</textarea>
+                <textarea class="textarea-tag" disabled resize="none;">tagged: {{userTags}}</textarea>
+            </span>
+            <span *ngIf="editing">
+                <textarea class="textarea-tag" disabled resize="none;">tags:</textarea> <input [ngModel]="tagString">
+                <textarea class="textarea-tag" disabled resize="none;">tagged:</textarea> <input [ngModel]="userTagString">
+            </span>
             <app-comment *ngFor="let comment of post.comments ; index as i" [comment]="post.comments[i]">
             </app-comment>
-            <textarea class= "textarea-tag" disabled resize="none;">likes: {{likeAmount}}</textarea>
+            <textarea class="textarea-tag" disabled resize="none;">likes: {{likeAmount}}</textarea>
 
 
 

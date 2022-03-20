@@ -25,7 +25,7 @@ import { CommentComponent } from './components/comment/comment.component';
     TimelineComponent,
     AddPostComponent,
     PostComponent,
-    CommentComponent
+    CommentComponent,
   ],
   imports: [
     BrowserModule,

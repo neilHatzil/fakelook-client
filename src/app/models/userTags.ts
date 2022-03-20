@@ -1,9 +1,10 @@
 import IPost from "./posts";
+import IUser from "./users";
 
 export default interface IUserTag {
-    id:string;
-    user:string;
-    userId:string;
-    postId:string;
+    //id:string;
+    user:IUser;
+    userId:number;
+    postId:number;
     Post:IPost|null;
 }
