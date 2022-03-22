@@ -21,9 +21,9 @@
                 <textarea class="textarea-tag" disabled resize="none;">tagged: {{userTags}}</textarea>
             </span>
             <span *ngIf="editing">
-                <textarea class="textarea-tag" disabled resize="none;">tags:</textarea> <input [ngModel]="tagString">
+                <textarea class="textarea-tag" disabled resize="none;">tags:</textarea> <input [(ngModel)]="tagString">
                 <textarea class="textarea-tag" disabled resize="none;">tagged:</textarea> <input
-                    [ngModel]="userTagString">
+                    [(ngModel)]="userTagString">
                 <button class="post-item" (click)="applyChanges()">Apply</button>
             </span>
             <app-comment *ngFor="let comment of post.comments ; index as i" [comment]="post.comments[i]">
@@ -32,9 +32,9 @@
         <span *ngIf="isExtended">
         <span *ngIf="!editing">
             <div class="comment-box">
-            <textarea class="textarea-tag" disabled resize="none;">comment:</textarea> <input [ngModel]="comment">
-            <textarea class="textarea-tag" disabled resize="none;">tags:</textarea> <input [ngModel]="commentTags">
-            <textarea class="textarea-tag" disabled resize="none;">tagged:</textarea> <input [ngModel]="commentUserTags">
+            <textarea class="textarea-tag" disabled resize="none;">comment:</textarea> <input [(ngModel)]="comment">
+            <textarea class="textarea-tag" disabled resize="none;">tags:</textarea> <input [(ngModel)]="commentTags">
+            <textarea class="textarea-tag" disabled resize="none;">tagged:</textarea> <input [(ngModel)]="commentUserTags">
             <button class="post-item" (click)="addComment()">Comment</button>
         </div>
         </span>

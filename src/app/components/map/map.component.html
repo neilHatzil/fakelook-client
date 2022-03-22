@@ -19,4 +19,4 @@
     </ac-map>
   </div>
 </div>
-<app-post *ngIf="showDialog" [post]="selectedPost" (closeDialogEmitter)="closeDialog()"></app-post>
+<app-post *ngIf="showDialog" [setPost]="selectedPost" (closeDialogEmitter)="closeDialog()"></app-post>

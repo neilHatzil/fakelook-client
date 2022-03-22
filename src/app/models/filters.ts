@@ -1,8 +1,8 @@
 
 export default interface IFilter {
-    startingDate:Date;
-    endingDate:Date;
-    publishers:string[];
-    tags:string[];
-    taggedUsers:string[];
+    startingDate:Date|null;
+    endingDate:Date|null;
+    publishers:string[]|null;
+    tags:string[]|null;
+    taggedUsers:string[]|null;
 }

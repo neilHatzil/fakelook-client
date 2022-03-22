@@ -4,6 +4,7 @@ import { Subject } from 'rxjs';
 import IComment from 'src/app/models/comments';
 import IPost from 'src/app/models/posts';
 import ITag from 'src/app/models/tags';
+import IUserTagComment from 'src/app/models/userTagComment';
 import IUserTag from 'src/app/models/userTags';
 import { AuthService } from 'src/app/services/auth.service';
 import { PostsService } from 'src/app/services/posts.service';
@@ -25,9 +26,7 @@ export class PostComponent implements OnInit {
 
   //-------this belongs to map functionality
 
-  //-------this belongs to map functionality
-
-
+//this is used to run setup functions
   @Input() changing: Subject<boolean>=new Subject;
 
   //used to show extended information
@@ -56,20 +55,30 @@ export class PostComponent implements OnInit {
   comment: string = "";
   commentTags: string = "";
   commentUserTags: string = "";
-
-  @Input() post: IPost = {
-    id: 0,
-    description: "temp",
-    imageSorce: "temp",
-    x_Position: 0, y_Position: 0, z_Position: 0,
-    date: new Date(),
-    comments: [{ id: 0, content: "", user: { id: 0, userName: "temp", password: "temp", name: "temp", address: "temp", age: "temp", workplace: "temp", comments: [], posts: [], likes: [], userTaggedPost: [] }, tags: [], userTaggedComment: [] }],
-    likes: null,
-    user: null,
-    userId: 0,
-    tags: [{ content: "first" }, { content: "very nice image! please call me, grandma." }],
-    userTaggedPost: []
-  };
+  post!:IPost;
+  @Input() set setPost(value:IPost){
+    //console.log(value);
+    
+    if(value){
+      this.post=value;
+      this.countLikes();
+      this.setupTags();
+      this.setupUserTags();
+    }
+  }
+  // = {
+  //   id: 0,
+  //   description: "temp",
+  //   imageSorce: "temp",
+  //   x_Position: 0, y_Position: 0, z_Position: 0,
+  //   date: new Date(),
+  //   comments: [{ id: 0, content: "", user: { id: 0, userName: "temp", password: "temp", name: "temp", address: "temp", age: "temp", workplace: "temp", comments: [], posts: [], likes: [], userTaggedPost: [] }, tags: [], userTaggedComment: [] }],
+  //   likes: null,
+  //   user: null,
+  //   userId: 0,
+  //   tags: [{ content: "first" }, { content: "very nice image! please call me, grandma." }],
+  //   userTaggedPost: []
+  // };
 
   constructor(private authService: AuthService, private postService: PostsService, private router: Router) { }
 
@@ -77,9 +86,6 @@ export class PostComponent implements OnInit {
     this.changing.subscribe(v => { 
       console.log('value is changing', v);
     });
-    this.countLikes();
-    this.setupTags();
-    this.setupUserTags();
     this.addEditButton()
   }
 
@@ -99,8 +105,9 @@ export class PostComponent implements OnInit {
       }
 
       //setting up usertags:
-      let tempPost: IPost = this.post;
-      let temparrayUserTags = this.userTagString.split(" ");
+      let tempPost: IPost = this.post;      
+      let temparrayUserTags:string[] = this.userTagString.split(" ");
+      
       for (let i = 0; i < temparrayUserTags.length; i++) {
         if (tempPost.userTaggedPost != null) {
           tempPost.userTaggedPost[i] =
@@ -111,15 +118,16 @@ export class PostComponent implements OnInit {
               userTaggedPost: null
             },
             userId: null, postId: null, Post: null
-          }
+          }          
         }
         else {
           console.log("didnt make usertag");
 
         }
       }
-      console.log(this.post);
-
+      // this.post.likes=null;
+      // this.post.userTaggedPost=null;
+      // this.post.tags=null;
       this.postService.editPost(this.post);
       //, this.userTags.split(" ")
       this.refreshFeed();
@@ -150,31 +158,32 @@ export class PostComponent implements OnInit {
   //used to convert tag model to string for display
   setupTags() {
     
-    if (this.post.tags != null) {
+    // if (this.post.tags != null) {
 
-      for (let i = 0; i < this.post.tags.length; i++) {
-        this.tags = this.tags + this.post.tags[i].content + ", ";
-      }
-      this.tagString = this.tags.replace(/,/g, '');
-    }
-    else {
-      this.tags = "empty";
-    }
+    //   for (let i = 0; i < this.post.tags.length; i++) {
+    //     this.tags = this.tags + this.post.tags[i].content + ", ";
+    //   }
+    //   this.tagString = this.tags.replace(/,/g, '');
+    // }
+    // else {
+    //   this.tags = "empty";
+    // }
   }
 
   //used to convert userTag model to string for display
   setupUserTags() {
 
-    if (this.post.userTaggedPost != null) {
-      //console.log(this.post.userTaggedPost[0], "this log is in post->setUserTags");
-      for (let i = 0; i < this.post.userTaggedPost.length; i++) {
-        this.userTags = this.userTags + ", " + this.post.userTaggedPost[i].user.userTaggedPost;
-      }
-      this.userTagString = this.userTags;
-    }
-    else {
-      this.userTags = "empty";
-    }
+//this.post.userTaggedPost?.forEach(console.log);
+    // if (this.post.userTaggedPost != null) {
+    //   //console.log(this.post.userTaggedPost[0], "this log is in post->setUserTags");
+    //   for (let i = 0; i < this.post.userTaggedPost.length; i++) {
+    //     this.userTags = this.userTags + ", " + this.post.userTaggedPost[i].user.userTaggedPost;
+    //   }
+    //   this.userTagString = this.userTags;
+    // }
+    // else {
+    //   this.userTags = "empty";
+    // }
   }
 
   //used to show extended information
@@ -221,22 +230,23 @@ export class PostComponent implements OnInit {
 
     //setting up usertags:
     let temparrayUserTags = this.commentUserTags.split(" ");
+    let temparrayUserTagsArray:IUserTagComment[]=[];
     for (let i = 0; i < temparrayUserTags.length; i++) {
       if (commentToSend.userTaggedComment != null) {
-        commentToSend.userTaggedComment[i] =
+        
+        temparrayUserTagsArray[i] =
         {
           user: {
-            id: 0, userName: temparrayUserTags[i], password: "", name: temparrayUserTags[i],
-            address: "", age: "1", workplace: "", comments: null, posts: null, likes: null,
-            userTaggedPost: null
+            userName: temparrayUserTags[i]
           },
-          userId: null, postId: null, Post: null
+          /*userId: null, commentId: null, comment: null*/
         }
       }
     }
+    commentToSend.userTaggedComment=temparrayUserTagsArray;
     console.log(commentToSend);
 
-    this.postService.makeComment(commentToSend);
+     this.postService.makeComment(commentToSend);
   }
 
   refreshFeed() {

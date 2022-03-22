@@ -14,14 +14,12 @@ export class TimelineComponent implements OnInit {
 posts:IPost[]=[];
 
 //used to notify posts the content has arrived
-postsArrived: Subject<boolean> = new Subject();
   constructor(private postService: PostsService) { }
   ngOnInit(): void {
     this.getposts();
   }
 
   getFilteredPosts(filter:IFilter){
-console.log(filter);
 this.postService.filterPosts(filter).subscribe((result)=>{
   this.posts=result;      
 })
@@ -30,10 +28,7 @@ this.postService.filterPosts(filter).subscribe((result)=>{
   getposts(){
     this.postService.getAllPosts().subscribe((result)=>{
       this.posts=result;
-      this.arrive();
     })
   }
-arrive(){
-  this.postsArrived.next(true);        
-}
+
 }

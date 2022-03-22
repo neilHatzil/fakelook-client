@@ -40,9 +40,10 @@ export class PostsService {
   }
 
   editPost(post: IPost): void {
+    console.log(post);
     const currentUrl = `${this.url}Post/EditPost`;
     this.subs.push(
-      this.http.post<any>(currentUrl, post).subscribe(() => {
+      this.http.put<any>(currentUrl, post).subscribe(() => {
       })
     );
   }
@@ -63,7 +64,7 @@ export class PostsService {
     return this.http.get<IPost[]>(currentUrl, { headers });
   }
 
-  filterPosts(filter: IFilter): Observable<IPost[]> {
+  filterPosts(filter: IFilter): Observable<IPost[]> {    
     const currentUrl = `${this.url}Post/Filter`;
     const headers = new HttpHeaders({
       Authorization: 'Bearer ' + this.getToken(),

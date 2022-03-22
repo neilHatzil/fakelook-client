@@ -32,11 +32,34 @@ export class FilterComponent implements OnInit {
   }
   submitFilter() {
     const filter: IFilter = {
-      startingDate: this.PostForm.controls['startingDate'].value,
-      endingDate: this.PostForm.controls['endingDate'].value,
+      
+      startingDate:null,
+      endingDate: null,
       publishers: this.PostForm.controls['publishers'].value.split(" "),
       tags: this.PostForm.controls['tags'].value.split(" "),
       taggedUsers: this.PostForm.controls['taggedUsers'].value.split(" "),
+    }
+    if( this.PostForm.controls['startingDate'].value==''){
+      filter.startingDate=new Date('0001-01-01T00:00:00Z');
+    }
+    else{
+    filter.startingDate= this.PostForm.controls['startingDate'].value;
+    }
+
+    if( this.PostForm.controls['endingDate'].value==''){
+      filter.endingDate=new Date('0001-01-01T00:00:00Z');
+    }
+    else{
+      filter.endingDate=this.PostForm.controls['endingDate'].value;
+    }
+    if( this.PostForm.controls['publishers'].value==''){
+      filter.publishers=null;
+    }
+    if( this.PostForm.controls['tags'].value==''){
+      filter.tags=null;
+    }
+    if( this.PostForm.controls['taggedUsers'].value==''){
+      filter.taggedUsers=null;
     }
     this.FilterPosts.emit(filter);
 

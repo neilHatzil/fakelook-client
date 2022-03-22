@@ -1,3 +1,4 @@
+import IComment from "./comments";
 import IPost from "./posts";
 import IUser from "./users";
 
@@ -8,3 +9,4 @@ export default interface IUserTag {
     postId:number|null;
     Post:IPost|null;
 }
+
