@@ -15,6 +15,19 @@ import { PostsService } from 'src/app/services/posts.service';
 export class PostComponent implements OnInit {
   @Output() reloadPostsEvent = new EventEmitter<string>();
 
+//-------this belongs to map functionality
+  @Output() closeDialogEmitter = new EventEmitter();
+  close(): void {
+    this.closeDialogEmitter.emit();
+  }
+
+
+
+
+//-------this belongs to map functionality
+
+
+
   //used to show extended information
   isExtended: boolean = false;
 
@@ -38,15 +51,15 @@ export class PostComponent implements OnInit {
   userTags: string = "";
 
   //used for creating comments:
-  comment:string="";
-  commentTags:string="";
-  commentUserTags:string="";
+  comment: string = "";
+  commentTags: string = "";
+  commentUserTags: string = "";
 
   @Input() post: IPost = {
     id: 0,
     description: "temp",
     imageSorce: "temp",
-    x_position: 0, y_position: 0, z_position: 0,
+    x_Position: 0, y_Position: 0, z_Position: 0,
     date: new Date(),
     comments: [{ id: 0, content: "", user: { id: "0", username: "temp", password: "temp", name: "temp", address: "temp", age: "temp", workplace: "temp", comments: [], posts: [], likes: [], userTaggedPost: [] }, tags: [], userTaggedComment: [] }],
     likes: null,
@@ -60,7 +73,7 @@ export class PostComponent implements OnInit {
 
   ngOnInit(): void {
     this.countLikes();
-    this.setupTags();
+    //this.setupTags();
     this.setupUserTags();
     this.addEditButton()
   }
@@ -76,15 +89,16 @@ export class PostComponent implements OnInit {
       let temparrayTags = this.tagString.split(" ");
       for (let i = 0; i < temparrayTags.length; i++) {
         if (this.post.tags != null) {
-          this.post.tags[i]={content:temparrayTags[i]};
+          this.post.tags[i] = { content: temparrayTags[i] };
         }
       }
 
       //setting up usertags:
+      let tempPost:IPost=this.post;
       let temparrayUserTags = this.userTagString.split(" ");
       for (let i = 0; i < temparrayUserTags.length; i++) {
-        if (this.post.userTaggedPost != null) {
-          this.post.userTaggedPost[i] =
+        if (tempPost.userTaggedPost != null) {
+          tempPost.userTaggedPost[i] =
           {
             user: {
               id: "0", username: temparrayUserTags[i], password: "", name: temparrayUserTags[i],
@@ -94,9 +108,15 @@ export class PostComponent implements OnInit {
             userId: null, postId: null, Post: null
           }
         }
+        else{
+          console.log("didnt make usertag");
+          
+        }
       }
-      this.postService.editPost(this.post, this.userTags.split(" "));
-      console.error("the error below occurs because editPost is not working yet- post 405 (postcomp)");
+      console.log(this.post);
+      
+      this.postService.editPost(this.post);
+      //, this.userTags.split(" ")
       this.refreshFeed();
     }
   }
@@ -137,10 +157,9 @@ export class PostComponent implements OnInit {
 
   //used to convert userTag model to string for display
   setupUserTags() {
+    
     if (this.post.userTaggedPost != null) {
       for (let i = 0; i < this.post.userTaggedPost.length; i++) {
-        //console.log(this.userTags);
-        //console.log(this.post.userTaggedPost[i].user);
         this.userTags = this.userTags + ", " + this.post.userTaggedPost[i].user;
       }
       this.userTagString = this.userTags;
@@ -168,27 +187,27 @@ export class PostComponent implements OnInit {
   }
 
   addComment() {
-  //comment:string="";
-  //commentTags:string="";
-  //commentUserTags:string="";
-  const commentToSend: IComment={
-    content:this.comment,
-    userId:Number(this.authService.getUser().id),
-    postId:this.post.id,
-    id:0,
-    user:{
-      id: "0", username: "temp", password: "", name: "temp",
-      address: "", age: "1", workplace: "", comments: null, posts: null, likes: null,
-      userTaggedPost: null
-    },
-    tags:[],
-    userTaggedComment:[]    
-  }
+    //comment:string="";
+    //commentTags:string="";
+    //commentUserTags:string="";
+    const commentToSend: IComment = {
+      content: this.comment,
+      userId: Number(this.authService.getUser().id),
+      postId: this.post.id,
+      id: 0,
+      user: {
+        id: "0", username: "temp", password: "", name: "temp",
+        address: "", age: "1", workplace: "", comments: null, posts: null, likes: null,
+        userTaggedPost: null
+      },
+      tags: [],
+      userTaggedComment: []
+    }
     //setting up tags:
     let temparrayTags = this.commentTags.split(" ");
     for (let i = 0; i < temparrayTags.length; i++) {
       if (commentToSend.tags != null) {
-        commentToSend.tags[i]={content:temparrayTags[i]};
+        commentToSend.tags[i] = { content: temparrayTags[i] };
       }
     }
 

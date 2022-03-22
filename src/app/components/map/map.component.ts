@@ -7,6 +7,7 @@ import {
 import { Observable } from 'rxjs';
 import { mergeMap, map } from 'rxjs/operators';
 import IPost from 'src/app/models/posts';
+import { PostConverter } from 'src/converters/cesium-converter';
 import { PostsService } from '../../services/posts.service';
 
 @Component({
@@ -34,25 +35,37 @@ export class MapComponent implements OnInit {
       useDefaultRenderLoop: true,
     };
   }
-  entities$!: Observable<any>;
+  entities$!: Observable<AcNotification>;
+  posts:IPost[]=[]
   selectedPost!: IPost;
   showDialog = false;
   Cesium = Cesium;
   ngOnInit(): void {
+
+     this.postService.getAllPosts().subscribe((result)=>{
+      this.posts=result;      
+    })
+
     this.entities$ = this.postService.getAllPosts().pipe(
-      map((posts) => {
+      map((posts:any[]) => {
         return posts.map((post) => ({
           id: post.id,
           actionType: ActionType.ADD_UPDATE,
-          entity: post,
+          entity: PostConverter.convertIPost(post)
         }));
       }),
       mergeMap((entity) => entity)
-    );
+    );    
   }
   showFullPost(post: IPost): void {
+    
+    for(let i=0;i<this.posts.length;i++){
+      if(this.posts[i].id==post.id){
+        this.selectedPost=this.posts[i];
+      }
+    }
     this.showDialog = true;
-    this.selectedPost = post;
+    //this.selectedPost = post;
   }
   closeDialog(): void {
     this.showDialog = false;

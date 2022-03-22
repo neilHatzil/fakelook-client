@@ -16,6 +16,7 @@ import { AddPostComponent } from './components/add-post/add-post.component';
 import { PostComponent } from './components/post/post.component';
 import { CommentComponent } from './components/comment/comment.component';
 import { PostsService } from './services/posts.service';
+import { FilterComponent } from './components/filter/filter.component';
 
 @NgModule({
   declarations: [
@@ -28,6 +29,7 @@ import { PostsService } from './services/posts.service';
     AddPostComponent,
     PostComponent,
     CommentComponent,
+    FilterComponent,
   ],
   imports: [
     BrowserModule,

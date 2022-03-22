@@ -1,0 +1,72 @@
+<div class="display-center filter">
+    <form class="signing-box" [formGroup]="PostForm" (ngSubmit)="submitFilter()">
+      <div class="display-center"><h2>Filter posts</h2></div>
+    
+      <label for="startingDate">Starting date:</label>
+      <input formControlName="startingDate" type="date" id="startingDate" />
+      <div
+        class="error"
+        *ngIf="
+        PostForm.controls['startingDate'].touched &&
+        PostForm.controls['startingDate'].invalid
+        "
+      >
+      starting date not valid
+      </div>
+      
+      <label for="endingDate">Ending date:</label>
+      <input formControlName="endingDate" type="date" id="endingDate" />
+      <div
+        class="error"
+        *ngIf="
+        PostForm.controls['endingDate'].touched &&
+        PostForm.controls['endingDate'].invalid
+        "
+      >
+      ending date not valid
+      </div>
+
+      <label for="publishers">Publishers (seperated by spaces)</label>
+      <input formControlName="publishers" type="text" id="publishers" />
+      <div
+        class="error"
+        *ngIf="
+        PostForm.controls['publishers'].touched &&
+        PostForm.controls['publishers'].invalid
+        "
+      >
+      Publishers not valid
+      </div>
+
+      <label for="tags">Tags (seperated by spaces)</label>
+      <input formControlName="tags" type="text" id="tags" />
+      <div
+        class="error"
+        *ngIf="
+        PostForm.controls['tags'].touched &&
+        PostForm.controls['tags'].invalid
+        "
+      >
+      tags not valid
+      </div>
+
+      <label for="taggedUsers">Users tagged (seperated by spaces)</label>
+      <input formControlName="taggedUsers" type="text" id="taggedUsers" />
+      <div
+        class="error"
+        *ngIf="
+        PostForm.controls['taggedUsers'].touched &&
+        PostForm.controls['taggedUsers'].invalid
+        "
+      >
+      user tags not valid
+      </div>
+
+      <div class="display-center">
+        <button type="submit" class="btn" [disabled]="!PostForm.valid">
+          Filter
+        </button>
+      </div>
+    </form>
+  </div>
+  

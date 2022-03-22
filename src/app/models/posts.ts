@@ -8,14 +8,14 @@ export default interface IPost {
     id:number;
     description: string;
     imageSorce:string;
-    x_position: number;
-    y_position: number;
-    z_position: number;
+    x_Position: number;
+    y_Position: number;
+    z_Position: number;
     date:Date;
-    likes?:ILike[]|null; //trying with null
+    likes?:ILike[]|null; 
     user?:IUser|null;
     userId:string;
-    comments:IComment[]; //trying with null
-    tags?:ITag[]|null; //trying with null
+    comments:IComment[];
+    tags?:ITag[]|null;
     userTaggedPost?:IUserTag[]|null;
 }

@@ -4,6 +4,7 @@ import IPost from '../models/posts';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Router } from '@angular/router';
 import IComment from '../models/comments';
+import IFilter from '../models/filters';
 
 @Injectable({
   providedIn: 'root'
@@ -21,10 +22,11 @@ export class PostsService {
     return sessionStorage.getItem('token');
   }
 
-  makePost(post: IPost,userTags:string[]): void {
+  makePost(post: IPost): void {
     const currentUrl = `${this.url}Post/AddPost`;
     this.subs.push(
-      this.http.post<any>(currentUrl,{post,userTags}).subscribe(() => {
+      this.http.post<any>(currentUrl,post).subscribe(() => {
+        this.router.navigateByUrl('/Home/Timeline');
       })
     );
   }
@@ -37,17 +39,16 @@ export class PostsService {
     );
   }
 
-  editPost(post: IPost,userTags:string[]): void {
+  editPost(post: IPost): void {
     const currentUrl = `${this.url}Post/EditPost`;
     this.subs.push(
-      this.http.post<any>(currentUrl,{post,userTags}).subscribe(() => {
+      this.http.post<any>(currentUrl,post).subscribe(() => {
       })
     );
   }
 
-
   likeUnlike(postId:number,userId:number): void {
-    const currentUrl = `${this.url}Post/LikeUnlike?postId=${postId}&userId=${userId}`; //?postId=1017&userId=7
+    const currentUrl = `${this.url}Post/LikeUnlike/${postId}/${userId}`; //?postId=1017&userId=7
     this.subs.push(
       this.http.post<any>(currentUrl,{postId:postId,userId:userId}).subscribe(() => {
       })
@@ -60,5 +61,13 @@ export class PostsService {
         Authorization: 'Bearer ' + this.getToken(),
       });
       return this.http.get<IPost[]>(currentUrl,{ headers });
+    }
+
+    filterPosts(filter: IFilter): void {
+      const currentUrl = `${this.url}Post/Filter`;
+      this.subs.push(
+        this.http.post<any>(currentUrl,filter).subscribe(() => {
+        })
+      );
     }
  }

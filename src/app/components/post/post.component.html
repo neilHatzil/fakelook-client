@@ -13,6 +13,7 @@
             <button class="post-item" (click)="editPost()">Edit</button>
         </span>
         <button class="post-item" (click)="likeUnlike()">Like</button>
+        <button class="post-item" (click)="close()">Close</button>
         <div class="post-text-bg" *ngIf="isExtended">
             <textarea class="textarea-tag" disabled resize="none;">likes: {{likeAmount}}</textarea>
             <span *ngIf="!editing">

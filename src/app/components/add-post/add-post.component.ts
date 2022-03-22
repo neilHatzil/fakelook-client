@@ -40,13 +40,14 @@ export class AddPostComponent implements OnInit {
    }
 
   submitPost(): void {
+    
     const post: IPost = {
       id: 0,
       description: this.PostForm.controls['description'].value,
       imageSorce: this.PostForm.controls['image'].value,
-      x_position: 0,
-      y_position: 0,
-      z_position: 0,
+      x_Position: 0,
+      y_Position: 0,
+      z_Position: 0,
       date: new Date(),
       comments: [],
       //likes: null,
@@ -55,7 +56,18 @@ export class AddPostComponent implements OnInit {
       tags: [], //this.tagSetup()
       userTaggedPost: this.userTagSetup()
     };
-    this.postService.makePost(post,this.userTags);
+    
+
+    navigator.geolocation.getCurrentPosition((data) => {
+      post.x_Position = data.coords.longitude;
+      post.y_Position = data.coords.latitude;
+      console.log(post.x_Position);
+      console.log(post.y_Position);
+      post.z_Position = 0;
+    });
+    console.log(post);
+    
+    this.postService.makePost(post);
   }
 
   tagSetup(): ITag[] {
