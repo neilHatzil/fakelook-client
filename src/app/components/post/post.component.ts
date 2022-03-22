@@ -15,14 +15,14 @@ import { PostsService } from 'src/app/services/posts.service';
 export class PostComponent implements OnInit {
   @Output() reloadPostsEvent = new EventEmitter<string>();
 
-//-------this belongs to map functionality
+  //-------this belongs to map functionality
   @Output() closeDialogEmitter = new EventEmitter();
   close(): void {
     this.closeDialogEmitter.emit();
   }
 
 
-//-------this belongs to map functionality
+  //-------this belongs to map functionality
 
 
 
@@ -77,7 +77,7 @@ export class PostComponent implements OnInit {
   }
 
   editPost() {
-    this.editing = !this.editing;        
+    this.editing = !this.editing;
   }
 
   applyChanges() {
@@ -92,7 +92,7 @@ export class PostComponent implements OnInit {
       }
 
       //setting up usertags:
-      let tempPost:IPost=this.post;
+      let tempPost: IPost = this.post;
       let temparrayUserTags = this.userTagString.split(" ");
       for (let i = 0; i < temparrayUserTags.length; i++) {
         if (tempPost.userTaggedPost != null) {
@@ -106,13 +106,13 @@ export class PostComponent implements OnInit {
             userId: null, postId: null, Post: null
           }
         }
-        else{
+        else {
           console.log("didnt make usertag");
-          
+
         }
       }
       console.log(this.post);
-      
+
       this.postService.editPost(this.post);
       //, this.userTags.split(" ")
       this.refreshFeed();
@@ -156,9 +156,9 @@ export class PostComponent implements OnInit {
 
   //used to convert userTag model to string for display
   setupUserTags() {
-    
+
     if (this.post.userTaggedPost != null) {
-      console.log(this.post.userTaggedPost[0],"this log is in post->setUserTags");
+      console.log(this.post.userTaggedPost[0], "this log is in post->setUserTags");
       for (let i = 0; i < this.post.userTaggedPost.length; i++) {
         this.userTags = this.userTags + ", " + this.post.userTaggedPost[i].user.userTaggedPost;
       }
@@ -226,6 +226,7 @@ export class PostComponent implements OnInit {
         }
       }
     }
+    console.log(commentToSend);
 
     this.postService.makeComment(commentToSend);
   }
