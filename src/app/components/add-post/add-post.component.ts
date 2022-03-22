@@ -61,10 +61,8 @@ export class AddPostComponent implements OnInit {
     navigator.geolocation.getCurrentPosition((data) => {
       post.x_Position = data.coords.longitude;
       post.y_Position = data.coords.latitude;
-      console.log(post.x_Position);
-      console.log(post.y_Position);
       post.z_Position = 0;
-    });
+    });    
     console.log(post);
     
     this.postService.makePost(post);

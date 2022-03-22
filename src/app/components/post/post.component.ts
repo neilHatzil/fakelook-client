@@ -71,13 +71,13 @@ export class PostComponent implements OnInit {
 
   ngOnInit(): void {
     this.countLikes();
-    //this.setupTags();
+    this.setupTags();
     this.setupUserTags();
     this.addEditButton()
   }
 
   editPost() {
-    this.editing = !this.editing;
+    this.editing = !this.editing;        
   }
 
   applyChanges() {
@@ -143,6 +143,7 @@ export class PostComponent implements OnInit {
   //used to convert tag model to string for display
   setupTags() {
     if (this.post.tags != null) {
+
       for (let i = 0; i < this.post.tags.length; i++) {
         this.tags = this.tags + this.post.tags[i].content + ", ";
       }
@@ -157,8 +158,9 @@ export class PostComponent implements OnInit {
   setupUserTags() {
     
     if (this.post.userTaggedPost != null) {
+      console.log(this.post.userTaggedPost[0],"this log is in post->setUserTags");
       for (let i = 0; i < this.post.userTaggedPost.length; i++) {
-        this.userTags = this.userTags + ", " + this.post.userTaggedPost[i].user;
+        this.userTags = this.userTags + ", " + this.post.userTaggedPost[i].user.userTaggedPost;
       }
       this.userTagString = this.userTags;
     }
