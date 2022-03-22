@@ -4,7 +4,7 @@ import IPost from "./posts";
 import IUserTag from "./userTags";
 
 export default interface IUser {
-    id:string;
+    id:number;
     username:string;
     password:string;
     name: string;

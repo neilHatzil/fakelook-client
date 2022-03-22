@@ -22,8 +22,6 @@ export class PostComponent implements OnInit {
   }
 
 
-
-
 //-------this belongs to map functionality
 
 
@@ -61,10 +59,10 @@ export class PostComponent implements OnInit {
     imageSorce: "temp",
     x_Position: 0, y_Position: 0, z_Position: 0,
     date: new Date(),
-    comments: [{ id: 0, content: "", user: { id: "0", username: "temp", password: "temp", name: "temp", address: "temp", age: "temp", workplace: "temp", comments: [], posts: [], likes: [], userTaggedPost: [] }, tags: [], userTaggedComment: [] }],
+    comments: [{ id: 0, content: "", user: { id: 0, username: "temp", password: "temp", name: "temp", address: "temp", age: "temp", workplace: "temp", comments: [], posts: [], likes: [], userTaggedPost: [] }, tags: [], userTaggedComment: [] }],
     likes: null,
     user: null,
-    userId: "avi",
+    userId: 0,
     tags: [{ content: "first" }, { content: "very nice image! please call me, grandma." }],
     userTaggedPost: []
   };
@@ -101,7 +99,7 @@ export class PostComponent implements OnInit {
           tempPost.userTaggedPost[i] =
           {
             user: {
-              id: "0", username: temparrayUserTags[i], password: "", name: temparrayUserTags[i],
+              id: 0, username: temparrayUserTags[i], password: "", name: temparrayUserTags[i],
               address: "", age: "1", workplace: "", comments: null, posts: null, likes: null,
               userTaggedPost: null
             },
@@ -132,7 +130,7 @@ export class PostComponent implements OnInit {
     if (this.post.likes != null) {
       this.likeAmount = this.post.likes.length;
       for (let i = 0; i < this.post.likes.length; i++) {
-        if (this.post.likes[i].userId == this.authService.getUser().id) {
+        if (this.post.likes[i].userId == Number(this.authService.getUser().id)) {
           this.userliked = true;
         }
       }
@@ -183,7 +181,7 @@ export class PostComponent implements OnInit {
       this.likeAmount++;
       this.userliked = true;
     }
-    this.postService.likeUnlike(Number(this.post.id), parseInt(this.authService.getUser().id));
+    this.postService.likeUnlike(Number(this.post.id), Number(this.authService.getUser().id));
   }
 
   addComment() {
@@ -196,7 +194,7 @@ export class PostComponent implements OnInit {
       postId: this.post.id,
       id: 0,
       user: {
-        id: "0", username: "temp", password: "", name: "temp",
+        id: 0, username: "temp", password: "", name: "temp",
         address: "", age: "1", workplace: "", comments: null, posts: null, likes: null,
         userTaggedPost: null
       },
@@ -218,7 +216,7 @@ export class PostComponent implements OnInit {
         commentToSend.userTaggedComment[i] =
         {
           user: {
-            id: "0", username: temparrayUserTags[i], password: "", name: temparrayUserTags[i],
+            id: 0, username: temparrayUserTags[i], password: "", name: temparrayUserTags[i],
             address: "", age: "1", workplace: "", comments: null, posts: null, likes: null,
             userTaggedPost: null
           },

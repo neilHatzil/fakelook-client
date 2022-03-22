@@ -14,7 +14,7 @@ export default interface IPost {
     date:Date;
     likes?:ILike[]|null; 
     user?:IUser|null;
-    userId:string;
+    userId:number;
     comments:IComment[];
     tags?:ITag[]|null;
     userTaggedPost?:IUserTag[]|null;

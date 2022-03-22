@@ -43,7 +43,7 @@ export class SignUpComponent implements OnInit {
   submitPost(): void {
 
     const user: IUser = {
-      id:"temp",
+      id:0,
       username:this.signUpForm.controls['userName'].value,
       name: this.signUpForm.controls['firstName'].value,
       password:this.signUpForm.controls['password'].value,
@@ -56,6 +56,7 @@ export class SignUpComponent implements OnInit {
       userTaggedPost:null,
       
     };
+    console.log("1");
     this.authService.signUp(user);
   }
 }
