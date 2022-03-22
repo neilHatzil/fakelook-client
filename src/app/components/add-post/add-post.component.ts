@@ -80,7 +80,7 @@ export class AddPostComponent implements OnInit {
     let userTagArray: string[] = this.PostForm.controls['userTags'].value.split(" ");
     let returnArray: IUserTag[] = [];
     for (let i = 0; i < userTagArray.length; i++) {
-      returnArray[i] = { user: { id: 0, username: userTagArray[i], password: "temp", name: "temp", address: "temp", age: "temp", workplace: "temp", comments: [], posts: [], likes: [], userTaggedPost: [] }, userId: 0, postId: 0, Post: null };
+      returnArray[i] = { user: { id: 0, userName: userTagArray[i], password: "temp", name: "temp", address: "temp", age: "temp", workplace: "temp", comments: [], posts: [], likes: [], userTaggedPost: [] }, userId: 0, postId: 0, Post: null };
     }
     return returnArray;
   }

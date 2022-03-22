@@ -5,7 +5,7 @@ import IUserTag from "./userTags";
 
 export default interface IUser {
     id:number;
-    username:string;
+    userName:string;
     password:string;
     name: string;
     address:string;

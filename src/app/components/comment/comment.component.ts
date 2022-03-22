@@ -7,7 +7,7 @@ import IComment from 'src/app/models/comments';
   styleUrls: ['./comment.component.css']
 })
 export class CommentComponent implements OnInit {
-  @Input() comment:IComment={id:0, content:"temp",user: { id: 0,username:"temp",password:"temp",name:"temp",address:"temp",age:"temp",workplace:"temp",comments:[],posts:[],likes:[],userTaggedPost:[] },tags:[],userTaggedComment:[]} 
+  @Input() comment:IComment={id:0, content:"temp",user: { id: 0,userName:"temp",password:"temp",name:"temp",address:"temp",age:"temp",workplace:"temp",comments:[],posts:[],likes:[],userTaggedPost:[] },tags:[],userTaggedComment:[]} 
   name:string="";
   constructor() { }
 

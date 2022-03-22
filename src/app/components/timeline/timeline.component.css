@@ -1,0 +1,19 @@
+.filter-size{
+    width: 50%;
+    position:fixed;
+  }
+.feed-in-grid{
+    width: 90%;
+    grid-column: 2;
+}
+.filter-flex{
+    display:flex;
+    width:100%;
+    justify-content: flex-start;
+}
+.feed-grid{
+    display: grid;
+    grid-template-columns: 50% 50%;
+    gap: 10px;
+}
+

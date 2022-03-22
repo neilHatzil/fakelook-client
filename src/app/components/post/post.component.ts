@@ -59,7 +59,7 @@ export class PostComponent implements OnInit {
     imageSorce: "temp",
     x_Position: 0, y_Position: 0, z_Position: 0,
     date: new Date(),
-    comments: [{ id: 0, content: "", user: { id: 0, username: "temp", password: "temp", name: "temp", address: "temp", age: "temp", workplace: "temp", comments: [], posts: [], likes: [], userTaggedPost: [] }, tags: [], userTaggedComment: [] }],
+    comments: [{ id: 0, content: "", user: { id: 0, userName: "temp", password: "temp", name: "temp", address: "temp", age: "temp", workplace: "temp", comments: [], posts: [], likes: [], userTaggedPost: [] }, tags: [], userTaggedComment: [] }],
     likes: null,
     user: null,
     userId: 0,
@@ -99,7 +99,7 @@ export class PostComponent implements OnInit {
           tempPost.userTaggedPost[i] =
           {
             user: {
-              id: 0, username: temparrayUserTags[i], password: "", name: temparrayUserTags[i],
+              id: 0, userName: temparrayUserTags[i], password: "", name: temparrayUserTags[i],
               address: "", age: "1", workplace: "", comments: null, posts: null, likes: null,
               userTaggedPost: null
             },
@@ -158,7 +158,7 @@ export class PostComponent implements OnInit {
   setupUserTags() {
 
     if (this.post.userTaggedPost != null) {
-      console.log(this.post.userTaggedPost[0], "this log is in post->setUserTags");
+      //console.log(this.post.userTaggedPost[0], "this log is in post->setUserTags");
       for (let i = 0; i < this.post.userTaggedPost.length; i++) {
         this.userTags = this.userTags + ", " + this.post.userTaggedPost[i].user.userTaggedPost;
       }
@@ -196,7 +196,7 @@ export class PostComponent implements OnInit {
       postId: this.post.id,
       id: 0,
       user: {
-        id: 0, username: "temp", password: "", name: "temp",
+        id: 0, userName: this.authService.getUser().userName, password: "", name: "temp",
         address: "", age: "1", workplace: "", comments: null, posts: null, likes: null,
         userTaggedPost: null
       },
@@ -218,7 +218,7 @@ export class PostComponent implements OnInit {
         commentToSend.userTaggedComment[i] =
         {
           user: {
-            id: 0, username: temparrayUserTags[i], password: "", name: temparrayUserTags[i],
+            id: 0, userName: temparrayUserTags[i], password: "", name: temparrayUserTags[i],
             address: "", age: "1", workplace: "", comments: null, posts: null, likes: null,
             userTaggedPost: null
           },

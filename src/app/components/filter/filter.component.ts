@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from 'src/app/services/auth.service';
 import { PostsService } from 'src/app/services/posts.service';
@@ -10,14 +10,12 @@ import IFilter from 'src/app/models/filters';
   styleUrls: ['./filter.component.css']
 })
 export class FilterComponent implements OnInit {
-
+  @Output() FilterPosts = new EventEmitter<IFilter>();
   constructor(private authService: AuthService, private postService: PostsService) { }
   PostForm = new FormGroup({
     startingDate: new FormControl('', [
-      Validators.required,
     ]),
     endingDate: new FormControl('', [
-      Validators.required,
     ]),
     publishers: new FormControl('', [
     ]),
@@ -40,8 +38,9 @@ export class FilterComponent implements OnInit {
       tags: this.PostForm.controls['tags'].value.split(" "),
       taggedUsers: this.PostForm.controls['taggedUsers'].value.split(" "),
     }
-    console.log(filter);
-    this.postService.filterPosts(filter);
+    this.FilterPosts.emit(filter);
+
+    //this.postService.filterPosts(filter);
     
   }
 }

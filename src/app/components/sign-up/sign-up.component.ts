@@ -44,7 +44,7 @@ export class SignUpComponent implements OnInit {
 
     const user: IUser = {
       id:0,
-      username:this.signUpForm.controls['userName'].value,
+      userName:this.signUpForm.controls['userName'].value,
       name: this.signUpForm.controls['firstName'].value,
       password:this.signUpForm.controls['password'].value,
       address:this.signUpForm.controls['address'].value,
