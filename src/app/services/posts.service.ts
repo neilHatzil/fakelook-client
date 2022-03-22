@@ -63,11 +63,11 @@ export class PostsService {
     return this.http.get<IPost[]>(currentUrl, { headers });
   }
 
-  filterPosts(filter: IFilter): void {
+  filterPosts(filter: IFilter): Observable<IPost[]> {
     const currentUrl = `${this.url}Post/Filter`;
-    this.subs.push(
-      this.http.post<any>(currentUrl, filter).subscribe(() => {
-      })
-    );
-  }
+    const headers = new HttpHeaders({
+      Authorization: 'Bearer ' + this.getToken(),
+    });
+    return this.http.post<IPost[]>(currentUrl, filter)
+}
 }

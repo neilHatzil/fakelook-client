@@ -1,10 +1,11 @@
 <div class="timeline-flex">
-    <app-filter class="filter-size"></app-filter>
+    <app-filter class="filter-size" (FilterPosts)="getFilteredPosts($event)"></app-filter>
 </div>
 <div class="feed-grid">
 <div class="feed-in-grid">
     <app-post *ngFor="let post of posts ; index as i" [post]="posts[i]"
-        (reloadPostsEvent)="getposts()">
+        (reloadPostsEvent)="getposts()" [changing]="postsArrived">
     </app-post>
+    <button (click)="arrive()"></button>
 </div>
 </div>

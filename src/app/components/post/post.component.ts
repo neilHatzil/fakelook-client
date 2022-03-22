@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Router } from '@angular/router';
+import { Subject } from 'rxjs';
 import IComment from 'src/app/models/comments';
 import IPost from 'src/app/models/posts';
 import ITag from 'src/app/models/tags';
@@ -24,7 +25,10 @@ export class PostComponent implements OnInit {
 
   //-------this belongs to map functionality
 
+  //-------this belongs to map functionality
 
+
+  @Input() changing: Subject<boolean>=new Subject;
 
   //used to show extended information
   isExtended: boolean = false;
@@ -69,7 +73,10 @@ export class PostComponent implements OnInit {
 
   constructor(private authService: AuthService, private postService: PostsService, private router: Router) { }
 
-  ngOnInit(): void {
+  ngOnInit(): void {   
+    this.changing.subscribe(v => { 
+      console.log('value is changing', v);
+    });
     this.countLikes();
     this.setupTags();
     this.setupUserTags();
@@ -84,7 +91,7 @@ export class PostComponent implements OnInit {
     if (this.editing == true) {
 
       //setting up tags:
-      let temparrayTags = this.tagString.split(" ");
+      let temparrayTags:string[] = this.tagString.split(" ");
       for (let i = 0; i < temparrayTags.length; i++) {
         if (this.post.tags != null) {
           this.post.tags[i] = { content: temparrayTags[i] };
@@ -142,6 +149,7 @@ export class PostComponent implements OnInit {
 
   //used to convert tag model to string for display
   setupTags() {
+    
     if (this.post.tags != null) {
 
       for (let i = 0; i < this.post.tags.length; i++) {

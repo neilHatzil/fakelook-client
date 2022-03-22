@@ -1,4 +1,6 @@
 import { Component, OnInit, ViewChild, ViewChildren } from '@angular/core';
+import { Subject } from 'rxjs';
+import IFilter from 'src/app/models/filters';
 import IPost from 'src/app/models/posts';
 import { PostsService } from 'src/app/services/posts.service';
 import { PostComponent } from '../post/post.component';
@@ -10,15 +12,28 @@ import { PostComponent } from '../post/post.component';
 })
 export class TimelineComponent implements OnInit {
 posts:IPost[]=[];
+
+//used to notify posts the content has arrived
+postsArrived: Subject<boolean> = new Subject();
   constructor(private postService: PostsService) { }
   ngOnInit(): void {
     this.getposts();
   }
 
+  getFilteredPosts(filter:IFilter){
+console.log(filter);
+this.postService.filterPosts(filter).subscribe((result)=>{
+  this.posts=result;      
+})
+
+  }
   getposts(){
     this.postService.getAllPosts().subscribe((result)=>{
-      this.posts=result;      
+      this.posts=result;
+      this.arrive();
     })
   }
-
+arrive(){
+  this.postsArrived.next(true);        
+}
 }

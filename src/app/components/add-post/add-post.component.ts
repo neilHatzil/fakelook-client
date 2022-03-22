@@ -41,8 +41,6 @@ export class AddPostComponent implements OnInit {
 
   submitPost(): void {
 
-    
-
     navigator.geolocation.getCurrentPosition((data) => {
       let x:number = data.coords.longitude;
       let y:number = data.coords.latitude;
