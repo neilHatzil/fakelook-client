@@ -26,6 +26,8 @@ import {MatTooltipModule} from '@angular/material/tooltip';
 import {MatDialogModule} from '@angular/material/dialog';
 import { DialogComponent } from './components/dialog/dialog.component';
 import {MatButtonModule} from '@angular/material/button';
+import {MAT_DIALOG_DATA} from '@angular/material/dialog';
+
 
 
 
@@ -62,6 +64,7 @@ import {MatButtonModule} from '@angular/material/button';
     MatTooltipModule,
     MatDialogModule,
     MatButtonModule
+    
   ],
   providers: [PostsService],
   bootstrap: [AppComponent]

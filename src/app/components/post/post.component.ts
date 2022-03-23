@@ -77,7 +77,11 @@ export class PostComponent implements OnInit {
   }
 
   openDialog() {
-    const dialogRef = this.dialog.open(DialogComponent);
+    const dialogRef = this.dialog.open(DialogComponent,{
+      data: {
+        dataKey: this.post
+      }
+    });
 
     dialogRef.afterClosed().subscribe(result => {
     });

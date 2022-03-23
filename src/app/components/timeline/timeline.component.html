@@ -2,9 +2,9 @@
     <app-filter class="filter-size" (FilterPosts)="getFilteredPosts($event)"></app-filter>
 </div>
 <div class="feed-grid">
-<div class="feed-in-grid">
-    <app-post *ngFor="let post of posts ; index as i" [setPost]="posts[i]"
-        (reloadPostsEvent)="getposts()" [onMap]="notTimeline">
-    </app-post>
-</div>
+    <div class="feed-in-grid">
+        <app-post *ngFor="let post of posts ; index as i" [setPost]="posts[i]" (reloadPostsEvent)="getposts()"
+            [onMap]="notTimeline">
+        </app-post>
+    </div>
 </div>
