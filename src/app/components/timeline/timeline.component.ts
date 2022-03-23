@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, ViewChildren } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output, ViewChild, ViewChildren } from '@angular/core';
 import { Subject } from 'rxjs';
 import IFilter from 'src/app/models/filters';
 import IPost from 'src/app/models/posts';
@@ -11,6 +11,7 @@ import { PostComponent } from '../post/post.component';
   styleUrls: ['./timeline.component.css']
 })
 export class TimelineComponent implements OnInit {
+notTimeline:boolean=false;
 posts:IPost[]=[];
 
 //used to notify posts the content has arrived
@@ -21,7 +22,7 @@ posts:IPost[]=[];
 
   getFilteredPosts(filter:IFilter){
 this.postService.filterPosts(filter).subscribe((result)=>{
-  this.posts=result;  
+  this.posts=result; 
 })
 
   }

@@ -1,4 +1,23 @@
-<a [routerLink]="['/Home/Map']">Map </a>
+<mat-toolbar class="navbar">
+    <img src="../../../assets/Logo.jpeg" alt="">
+    <span>Fake Look</span>
+    <span class="example-spacer"></span>
+    <button [routerLink]="['/Home/Map']" mat-icon-button matSuffix class="route-btn" aria-label="Example icon-button with heart icon">
+      Map
+    </button>
+    <button [routerLink]="['/Home/Timeline']" mat-icon-button matSuffix class="route-btn" aria-label="Example icon-button with heart icon">
+      Timeline
+    </button>
+    <button [routerLink]="['/Home/AddPost']" mat-icon-button matSuffix class="route-btn" aria-label="Example icon-button with heart icon">
+      Add a Post
+    </button>
+  </mat-toolbar>
+  
+  <br><br><br><br>
+
+
+
+<!-- <a [routerLink]="['/Home/Map']">Map </a>
 <a [routerLink]="['/Home/Timeline']">Timeline </a>
-<a [routerLink]="['/Home/AddPost']">Creat a new Post</a>
+<a [routerLink]="['/Home/AddPost']">Creat a new Post</a> -->
 <router-outlet></router-outlet>

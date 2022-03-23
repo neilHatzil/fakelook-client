@@ -1,4 +1,37 @@
 .filter{
-    margin-left: 5vh;
+    margin-left: 10vw;
     width: 90%;
 }
+img{
+    width: 100%;
+    object-fit:contain;
+  }
+  
+  .signing-box{
+  margin-top: 2.5vh;
+  border: 0.25em solid linear-gradient(140deg, rgb(255, 0, 179),rgb(255, 72, 0), red);
+  border-radius: 0.25em;
+  width: 30vw;
+  padding: 1em;
+  height: 80%;
+  background-color: white;
+  display: grid;
+  grid-template-rows: 0.5% 99%;
+  /* row-gap: 3em; */
+  box-shadow: 0px 0px 3px #fff;
+  }
+  
+  .btn-login ,.mat-form-field{
+    width: 30vw;
+    height: 7vh;
+    margin-top: 2rem;
+  }
+  
+  .opacity{
+    opacity: 30%;
+  }
+  
+  .blue{
+    color: blue;
+  }
+  

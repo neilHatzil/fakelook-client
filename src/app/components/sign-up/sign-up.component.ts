@@ -16,22 +16,22 @@ export class SignUpComponent implements OnInit {
   signUpForm = new FormGroup({
     firstName: new FormControl('', [
       Validators.required,
-      Validators.minLength(2),
+      Validators.minLength(3),
     ]),
     userName: new FormControl('', [
       Validators.required,
-      Validators.minLength(2),
+      Validators.minLength(3),
     ]),
     age: new FormControl('', [
       Validators.required,
     ]),
     address: new FormControl('', [
       Validators.required,
-      Validators.minLength(2),
+      Validators.minLength(4),
     ]),
     workPlace: new FormControl('', [
       Validators.required,
-      Validators.minLength(2),
+      Validators.minLength(4),
     ]),
     password: new FormControl('', [
       Validators.required,

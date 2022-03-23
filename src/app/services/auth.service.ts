@@ -31,6 +31,7 @@ export class AuthService {
     this.subs.push(
       this.http.post<any>(currentUrl, user).subscribe((res) => {
         this.setToken(res.token);
+        this.setUser(res.user);
         this.router.navigateByUrl('/Home/Timeline');
       })
     );

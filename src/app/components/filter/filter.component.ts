@@ -12,7 +12,7 @@ import IFilter from 'src/app/models/filters';
 export class FilterComponent implements OnInit {
   @Output() FilterPosts = new EventEmitter<IFilter>();
   constructor(private authService: AuthService, private postService: PostsService) { }
-  PostForm = new FormGroup({
+  FilterForm = new FormGroup({
     startingDate: new FormControl('', [
     ]),
     endingDate: new FormControl('', [
@@ -35,30 +35,30 @@ export class FilterComponent implements OnInit {
       
       startingDate:null,
       endingDate: null,
-      publishers: this.PostForm.controls['publishers'].value.split(" "),
-      tags: this.PostForm.controls['tags'].value.split(" "),
-      taggedUsers: this.PostForm.controls['taggedUsers'].value.split(" "),
+      publishers: this.FilterForm.controls['publishers'].value.split(" "),
+      tags: this.FilterForm.controls['tags'].value.split(" "),
+      taggedUsers: this.FilterForm.controls['taggedUsers'].value.split(" "),
     }
-    if( this.PostForm.controls['startingDate'].value==''){
+    if( this.FilterForm.controls['startingDate'].value==''){
       filter.startingDate=new Date('0001-01-01T00:00:00Z');
     }
     else{
-    filter.startingDate= this.PostForm.controls['startingDate'].value;
+    filter.startingDate= this.FilterForm.controls['startingDate'].value;
     }
 
-    if( this.PostForm.controls['endingDate'].value==''){
+    if( this.FilterForm.controls['endingDate'].value==''){
       filter.endingDate=new Date('0001-01-01T00:00:00Z');
     }
     else{
-      filter.endingDate=this.PostForm.controls['endingDate'].value;
+      filter.endingDate=this.FilterForm.controls['endingDate'].value;
     }
-    if( this.PostForm.controls['publishers'].value==''){
+    if( this.FilterForm.controls['publishers'].value==''){
       filter.publishers=null;
     }
-    if( this.PostForm.controls['tags'].value==''){
+    if( this.FilterForm.controls['tags'].value==''){
       filter.tags=null;
     }
-    if( this.PostForm.controls['taggedUsers'].value==''){
+    if( this.FilterForm.controls['taggedUsers'].value==''){
       filter.taggedUsers=null;
     }
     this.FilterPosts.emit(filter);

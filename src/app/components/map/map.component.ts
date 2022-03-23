@@ -87,11 +87,6 @@ export class MapComponent implements OnInit {
 
   getFilteredPosts(filter: IFilter) {
   this.postService.filterPostsMap(filter)
-  
-  
-  
-  
-  
     /*  let tester: boolean = false;
     this.postService.filterPosts(filter).subscribe((result) => {
       this.posts = result;

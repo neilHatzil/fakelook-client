@@ -17,6 +17,17 @@ import { PostComponent } from './components/post/post.component';
 import { CommentComponent } from './components/comment/comment.component';
 import { PostsService } from './services/posts.service';
 import { FilterComponent } from './components/filter/filter.component';
+import {MatToolbarModule} from '@angular/material/toolbar';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import{ MatIconModule} from '@angular/material/icon';
+import {MatInputModule} from '@angular/material/input';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {MatTooltipModule} from '@angular/material/tooltip';
+import {MatDialogModule} from '@angular/material/dialog';
+import { DialogComponent } from './components/dialog/dialog.component';
+import {MatButtonModule} from '@angular/material/button';
+
+
 
 @NgModule({
   declarations: [
@@ -30,6 +41,8 @@ import { FilterComponent } from './components/filter/filter.component';
     PostComponent,
     CommentComponent,
     FilterComponent,
+    DialogComponent,
+    
   ],
   imports: [
     BrowserModule,
@@ -39,7 +52,16 @@ import { FilterComponent } from './components/filter/filter.component';
     ReactiveFormsModule,
     RouterModule,
     AngularCesiumWidgetsModule,
-    AngularCesiumModule.forRoot()
+    AngularCesiumModule.forRoot(),
+    BrowserAnimationsModule,
+    MatToolbarModule,
+    MatFormFieldModule,
+    MatIconModule,
+    MatInputModule,
+    BrowserAnimationsModule ,
+    MatTooltipModule,
+    MatDialogModule,
+    MatButtonModule
   ],
   providers: [PostsService],
   bootstrap: [AppComponent]

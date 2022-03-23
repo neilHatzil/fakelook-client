@@ -1,88 +1,83 @@
 <div class="display-center full-width">
-    <form class="signing-box" [formGroup]="signUpForm" (ngSubmit)="submitPost()">
-      <div class="display-center"><h2>Sign Up</h2></div>
-    
-      <label for="userName">User Name</label>
-      <input formControlName="userName" type="text" id="userName" />
-      <div
-        class="error"
-        *ngIf="
-          signUpForm.controls['userName'].touched &&
-          signUpForm.controls['userName'].invalid
-        "
-      >
-        User name not valid
+  <form class="signing-box" [formGroup]="signUpForm" (ngSubmit)="submitPost()">
+    <div style="height:50%;">
+      <img src="../../../assets/LogoFL.png" alt="">
+    </div>
+
+    <div>
+
+      <div>
+        <mat-form-field appearance="outline">
+          <mat-label>User Name</mat-label>
+          <input formControlName="userName" matInput placeholder="User Name">
+          <mat-icon matSuffix>perm_identity</mat-icon>
+          <mat-hint>Min 3 Characters</mat-hint>
+        </mat-form-field>
       </div>
 
-      <label for="password">Password</label>
-      <input formControlName="password" type="password" id="password" />
-      <div
-        class="error"
-        *ngIf="
-          signUpForm.controls['password'].touched &&
-          signUpForm.controls['password'].invalid
-        "
-      >
-        password not valid
-      </div>
-      
-      <label for="firstName">First Name</label>
-      <input formControlName="firstName" type="text" id="firstName" />
-      <div
-        class="error"
-        *ngIf="
-          signUpForm.controls['firstName'].touched &&
-          signUpForm.controls['firstName'].invalid
-        "
-      >
-        first name not valid
+      <div>
+        <mat-form-field appearance="outline">
+          <mat-label>Password</mat-label>
+          <input formControlName="password" matInput type="password" placeholder="Password">
+          <mat-icon matSuffix>lock</mat-icon>
+          <mat-hint>Min 4 Characters</mat-hint>
+        </mat-form-field>
       </div>
 
-      <label for="age">Age</label>
-      <input formControlName="age" type="number" id="age" />
-      <div
-        class="error"
-        *ngIf="
-          signUpForm.controls['age'].touched &&
-          signUpForm.controls['age'].invalid
-        "
-      >
-        age not valid
+      <div>
+        <mat-form-field appearance="outline">
+          <mat-label>First name</mat-label>
+          <input formControlName="firstName" matInput placeholder="First Name">
+          <mat-icon matSuffix>lock</mat-icon>
+          <mat-hint>Min 3 Characters</mat-hint>
+        </mat-form-field>
       </div>
 
-      <label for="address">Address</label>
-      <input formControlName="address" type="text" id="address" />
-      <div
-        class="error"
-        *ngIf="
-          signUpForm.controls['address'].touched &&
-          signUpForm.controls['address'].invalid
-        "
-      >
-        address not valid
+      <div>
+        <mat-form-field appearance="outline">
+          <mat-label>Age</mat-label>
+          <input formControlName="age" matInput placeholder="Age">
+          <mat-icon matSuffix>format_list_numbered</mat-icon>
+          <mat-hint>Min 4 Characters</mat-hint>
+        </mat-form-field>
       </div>
 
-      <label for="workPlace">Workplace</label>
-      <input formControlName="workPlace" type="text" id="workPlace" />
-      <div
-        class="error"
-        *ngIf="
-          signUpForm.controls['workPlace'].touched &&
-          signUpForm.controls['workPlace'].invalid
-        "
-      >
-        Workplace not valid
+      <div>
+        <mat-form-field appearance="outline">
+          <mat-label>Address</mat-label>
+          <input formControlName="address" matInput placeholder="Address">
+          <mat-icon matSuffix>home</mat-icon>
+          <mat-hint>Min 4 Characters</mat-hint>
+        </mat-form-field>
       </div>
 
-    
+      <div>
+        <mat-form-field appearance="outline">
+          <mat-label>Workplace</mat-label>
+          <input formControlName="workPlace" matInput placeholder="Workplace">
+          <mat-icon matSuffix>work</mat-icon>
+          <mat-hint>Min 4 Characters</mat-hint>
+        </mat-form-field>
+      </div>
+
       <div class="display-center">
-        <a [routerLink]="['/Login']">Login</a>
-      </div>
-      <div class="display-center">
-        <button type="submit" class="btn" [disabled]="!signUpForm.valid">
-          SignUp
+        <button type="submit" class="btn-login" [disabled]="!signUpForm.valid">
+          Sign up
         </button>
       </div>
-    </form>
-  </div>
-  
+
+      <div class="display-right opacity">
+        <span matTooltip="Help!">Need Help?</span>
+      </div>
+
+      <div class="display-center opacity">
+        <span>Already Have an account ?</span>
+      </div>
+
+      <div class="display-center">
+        <a class="blue" [routerLink]="['/Login']">Log-in</a>
+      </div>
+
+    </div>
+  </form>
+</div>

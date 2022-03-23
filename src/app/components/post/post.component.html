@@ -1,20 +1,37 @@
 <div>
     <div class="signing-box post-width">
-        <h3 class="displayed-center">a post:</h3>
-        <div class="post-flex">
+        <h2 class="text-marginer">{{username}}</h2>
+        <div class="text-marginer">{{date}}</div>
+        <div class="text-marginer">{{post.description}}</div>
+        <div class="post-flex" (click)="openDialog()">
             <div>
                 <img class="post-image" src={{post.imageSorce}}>
             </div>
-            <div class="post-text">{{post.description}}</div>
-
         </div>
-        <button class="post-item" (click)="expandPost()">Expand</button>
-        <span *ngIf="editButton">
-            <button class="post-item" (click)="editPost()">Edit</button>
+        <span class="like-flex">
+            <span class="text-marginer" style="margin-top:1.5vh ;">{{likeAmount}} Likes</span>
+<span>
+    <button mat-icon-button matTooltip="Like" matTooltipPosition="above" (click)="likeUnlike()">
+        <mat-icon [ngClass]="userliked ? 'btn-like': 'btn-unlike'">favorite</mat-icon>
+    </button>
+    <span *ngIf="editButton">
+            <button mat-icon-button matTooltip="Edit" matTooltipPosition="above" (click)="editPost()">
+                <mat-icon>edit</mat-icon>
+            </button>
         </span>
-        <button class="post-item" (click)="likeUnlike()">Like</button>
-        <button class="post-item" (click)="close()">Close</button>
+</span>
+           
+        </span>
+        
+
+
+        <span *ngIf="onMap">
+            <button class="post-item" (click)="close()">Close</button>
+        </span>
         <div class="post-text-bg" *ngIf="isExtended">
+            <span *ngIf="editButton">
+                <button class="post-item" (click)="editPost()">Edit</button>
+            </span>
             <textarea class="textarea-tag" disabled resize="none;">likes: {{likeAmount}}</textarea>
             <span *ngIf="!editing">
                 <textarea class="textarea-tag" disabled resize="none;">tags: {{tags}}</textarea>
@@ -30,15 +47,17 @@
             </app-comment>
         </div>
         <span *ngIf="isExtended">
-        <span *ngIf="!editing">
-            <div class="comment-box">
-            <textarea class="textarea-tag" disabled resize="none;">comment:</textarea> <input [(ngModel)]="comment">
-            <textarea class="textarea-tag" disabled resize="none;">tags:</textarea> <input [(ngModel)]="commentTags">
-            <textarea class="textarea-tag" disabled resize="none;">tagged:</textarea> <input [(ngModel)]="commentUserTags">
-            <button class="post-item" (click)="addComment()">Comment</button>
-        </div>
-        </span>
+            <span *ngIf="!editing">
+                <div class="comment-box">
+                    <textarea class="textarea-tag" disabled resize="none;">comment:</textarea> <input
+                        [(ngModel)]="comment">
+                    <textarea class="textarea-tag" disabled resize="none;">tags:</textarea> <input
+                        [(ngModel)]="commentTags">
+                    <textarea class="textarea-tag" disabled resize="none;">tagged:</textarea> <input
+                        [(ngModel)]="commentUserTags">
+                    <button class="post-item" (click)="addComment()">Comment</button>
+                </div>
+            </span>
         </span>
     </div>
 </div>
-

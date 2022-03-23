@@ -1,72 +1,53 @@
-<div class="display-center filter">
-    <form class="signing-box" [formGroup]="PostForm" (ngSubmit)="submitFilter()">
-      <div class="display-center"><h2>Filter posts</h2></div>
-    
-      <label for="startingDate">Starting date:</label>
-      <input formControlName="startingDate" type="date" id="startingDate" />
-      <div
-        class="error"
-        *ngIf="
-        PostForm.controls['startingDate'].touched &&
-        PostForm.controls['startingDate'].invalid
-        "
-      >
-      starting date not valid
-      </div>
-      
-      <label for="endingDate">Ending date:</label>
-      <input formControlName="endingDate" type="date" id="endingDate" />
-      <div
-        class="error"
-        *ngIf="
-        PostForm.controls['endingDate'].touched &&
-        PostForm.controls['endingDate'].invalid
-        "
-      >
-      ending date not valid
+<div class="filter full-width">
+  <form class="signing-box" [formGroup]="FilterForm" (ngSubmit)="submitFilter()">
+    <span class="display-center">Filter Posts</span>
+      <div style="height:0%">
+      <div>
+        <mat-form-field appearance="outline">
+          <mat-label>Starting Date</mat-label>
+          <input type="date" formControlName="startingDate" matInput placeholder="Starting Date">
+        </mat-form-field>
       </div>
 
-      <label for="publishers">Publishers (seperated by spaces)</label>
-      <input formControlName="publishers" type="text" id="publishers" />
-      <div
-        class="error"
-        *ngIf="
-        PostForm.controls['publishers'].touched &&
-        PostForm.controls['publishers'].invalid
-        "
-      >
-      Publishers not valid
+      <div>
+        <mat-form-field appearance="outline">
+          <mat-label>Ending Date</mat-label>
+          <input type="date" formControlName="endingDate" matInput placeholder="Ending Date">
+        </mat-form-field>
       </div>
 
-      <label for="tags">Tags (seperated by spaces)</label>
-      <input formControlName="tags" type="text" id="tags" />
-      <div
-        class="error"
-        *ngIf="
-        PostForm.controls['tags'].touched &&
-        PostForm.controls['tags'].invalid
-        "
-      >
-      tags not valid
+      <div>
+        <mat-form-field appearance="outline">
+          <mat-label>Publishers</mat-label>
+          <input formControlName="publishers" matInput placeholder="Publishers">
+          <mat-icon matSuffix>lock</mat-icon>
+          <mat-hint>Seperated by spaces</mat-hint>
+        </mat-form-field>
       </div>
 
-      <label for="taggedUsers">Users tagged (seperated by spaces)</label>
-      <input formControlName="taggedUsers" type="text" id="taggetaggedUsersdUsers" />
-      <div
-        class="error"
-        *ngIf="
-        PostForm.controls['taggedUsers'].touched &&
-        PostForm.controls['taggedUsers'].invalid
-        "
-      >
-      user tags not valid
+      <div>
+        <mat-form-field appearance="outline">
+          <mat-label>Tags</mat-label>
+          <input formControlName="tags" matInput placeholder="Tags">
+          <mat-icon matSuffix>lock</mat-icon>
+          <mat-hint>Seperated by spaces</mat-hint>
+        </mat-form-field>
+      </div>
+
+      <div>
+        <mat-form-field appearance="outline">
+          <mat-label>User tags</mat-label>
+          <input formControlName="taggedUsers" matInput placeholder="User tag">
+          <mat-icon matSuffix>lock</mat-icon>
+          <mat-hint>Seperated by spaces</mat-hint>
+        </mat-form-field>
       </div>
 
       <div class="display-center">
-        <button type="submit" class="btn" [disabled]="!PostForm.valid">
+        <button type="submit" class="btn-login" (click)="submitFilter()">
           Filter
         </button>
       </div>
-    </form>
-  </div>
-  
+    </div>
+  </form>
+</div>

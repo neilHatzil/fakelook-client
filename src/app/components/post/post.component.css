@@ -1,6 +1,6 @@
 .post-image{
     max-width: 100%;
-    max-height: 50vh;
+    max-height: 40vh;
     border: double black;
     border-radius: 1px;
 }
@@ -45,4 +45,38 @@ justify-content: space-around;
   .post-width {
     width: 100%;
   }
+  .like-flex{
+      display: flex;
+      justify-content:space-between;
+  }
+  .like-btn{
+margin-right: 3%;
+  }
+
+  .signing-box{
+    /* margin-top: 2.5vh;
+    border: 0.25em solid linear-gradient(140deg, rgb(255, 0, 179),rgb(255, 72, 0), red);
+    border-radius: 0.25em;
+    width: 30vw;
+    padding: 1em;
+    height: 80%;
+    display: grid;
+    grid-template-rows: 0.5% 99%; */
+    /* row-gap: 3em; */
+    margin-top: 2.5vh;
+    padding: 1em;
+    background-color: white;
+    box-shadow: 0px 0px 3px #fff;
+    }
+
+    .text-marginer{
+        margin-left: 3%;
+    }
+
+    .btn-like{
+        color: red;
+    } 
+    .btn-unlike{
+        color: rgb(182, 182, 182);
+    }
 
