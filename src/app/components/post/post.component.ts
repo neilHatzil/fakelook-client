@@ -94,10 +94,10 @@ export class PostComponent implements OnInit {
           {
             user: {
               id: 0, userName: temparrayUserTags[i], password: "", name: temparrayUserTags[i],
-              address: "", age: "1", workplace: "", comments: null, posts: null, likes: null,
+              address: "", age: "1", workPlace: "", comments: null, posts: null, likes: null,
               userTaggedPost: null
             },
-            userId: null, postId: null, Post: null
+            userId: 0, postId: null, Post: null
           }          
         }
         else {
@@ -182,7 +182,7 @@ export class PostComponent implements OnInit {
       id: 0,
       user: {
         id: 0, userName: this.authService.getUser().userName, password: "", name: "temp",
-        address: "", age: "1", workplace: "", comments: null, posts: null, likes: null,
+        address: "", age: "1", workPlace: "", comments: null, posts: null, likes: null,
         userTaggedPost: null
       },
       tags: [],

@@ -37,6 +37,7 @@ export class MapComponent implements OnInit {
     };
   }
   entities$!: Observable<AcNotification>;
+  filteredentities$!: Observable<AcNotification>;
   posts: IPost[] = []
   selectedPost!: IPost;
   showDialog = false;
@@ -47,24 +48,7 @@ export class MapComponent implements OnInit {
       this.posts = result;
     })
 
-    /*this.entities$ = this.postService.getAllPosts().pipe(
-      pairwise(),
-      map((posts: any[]) => {
-        this.posts2 = posts[1];
-        if(posts[0].length < posts[1].length){
-          posts[0] = posts[1];
-        }
-        return posts.map((post) => ({
-          id: post.id,
-          actionType:  posts[1].find((x: { id: IPost; }) => x.id == post.id) ? ActionType.ADD_UPDATE : ActionType.DELETE,
-          entity: PostConverter.convertIPost(post)
-        }));
-      }),
-      mergeMap((entity) => entity)
-    );*/
-
-    
-      this.entities$ = this.postService.getAllPosts().pipe(
+    this.entities$ = this.postService.getAllPosts().pipe(
       map((posts: any[]) => {
         return posts.map((post) => ({
           id: post.id,
@@ -74,7 +58,7 @@ export class MapComponent implements OnInit {
       }),
       mergeMap((entity) => entity)
     );
-  
+
   }
   showFullPost(post: IPost): void {
 
@@ -91,23 +75,24 @@ export class MapComponent implements OnInit {
   }
 
   getFilteredPosts(filter: IFilter) {
-    
+    let tester: boolean = false;
     this.postService.filterPosts(filter).subscribe((result) => {
       this.posts = result;
-      console.log(this.posts.length);
-      
+      for (let i = 0; i < this.posts.length; i++) {
+      }
 
-      this.entities$ = this.postService.filterPosts(filter).pipe(
-        map((posts: any[]) => {
-          return posts.map((post) => ({
-            id: post.id,
-            actionType: ActionType.ADD_UPDATE,
-            entity: PostConverter.convertIPost(post)
-          }));
-        }),
-        mergeMap((entity) => entity)
-      );
+      this.entities$.forEach(e => {
+        for (let i = 0; i < this.posts.length; i++) {
+          if (e.id == this.posts[i].id.toString()) {
+            tester = true;
+          }
+        }
+        if (tester == false) {
+          console.log(e.id);
+          e.actionType = ActionType.DELETE
+        }
+        tester = false;
+      })
     })
-
   }
 }

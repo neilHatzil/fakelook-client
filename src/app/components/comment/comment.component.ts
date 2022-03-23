@@ -21,7 +21,7 @@ export class CommentComponent implements OnInit {
     }
   }
 
-  @Input() comment: IComment = { id: 0, content: "temp", user: { id: 0, userName: "temp", password: "temp", name: "temp", address: "temp", age: "temp", workplace: "temp", comments: [], posts: [], likes: [], userTaggedPost: [] }, tags: [], userTaggedComment: [] }
+  @Input() comment: IComment = { id: 0, content: "temp", user: { id: 0, userName: "temp", password: "temp", name: "temp", address: "temp", age: "temp", workPlace: "temp", comments: [], posts: [], likes: [], userTaggedPost: [] }, tags: [], userTaggedComment: [] }
   name: string = "";
   constructor() { }
 

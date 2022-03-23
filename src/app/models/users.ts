@@ -10,7 +10,7 @@ export default interface IUser {
     name: string;
     address:string;
     age: string;
-    workplace:string;
+    workPlace:string;
     comments:IComment[] | null;
     posts:IPost[] | null;
     likes:ILike[] | null;

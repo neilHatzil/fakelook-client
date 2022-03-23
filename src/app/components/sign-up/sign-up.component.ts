@@ -49,7 +49,7 @@ export class SignUpComponent implements OnInit {
       password:this.signUpForm.controls['password'].value,
       address:this.signUpForm.controls['address'].value,
       age:String(this.signUpForm.controls['age'].value),
-      workplace:this.signUpForm.controls['workPlace'].value,
+      workPlace:this.signUpForm.controls['workPlace'].value,
       comments:null,
       posts:null,
       likes:null,
