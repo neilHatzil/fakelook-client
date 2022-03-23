@@ -212,6 +212,7 @@ export class PostComponent implements OnInit {
       }
     }
     commentToSend.userTaggedComment=temparrayUserTagsArray;
+    this.post.comments[this.post.comments.length]=commentToSend;
      this.postService.makeComment(commentToSend);
   }
 
