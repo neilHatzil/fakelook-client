@@ -94,10 +94,10 @@ export class PostComponent implements OnInit {
           {
             user: {
               id: 0, userName: temparrayUserTags[i], password: "", name: temparrayUserTags[i],
-              address: "", age: "1", workPlace: "", comments: null, posts: null, likes: null,
+              address: "", age: "1", workPlace: "", comments: [], posts: [], likes: [],
               userTaggedPost: null
             },
-            userId: 0, postId: null, Post: null
+            userId: 0, postId: 0, Post: null
           }          
         }
         else {

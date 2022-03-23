@@ -48,11 +48,13 @@ export class MapComponent implements OnInit {
       this.posts = result;
     })
 
-    this.entities$ = this.postService.getAllPosts().pipe(
-      map((posts: any[]) => {
-        return posts.map((post) => ({
-          id: post.id,
-          actionType: ActionType.ADD_UPDATE,
+    this.entities$ = this.postService.getAllPostsMap().pipe(
+      pairwise(),
+      map((posts) => {
+        const combine=posts[0].concat(posts[1]);
+        return combine.map((post) => ({
+          id: post.id.toString(),
+          actionType: this.getActionType(post,posts[1]),
           entity: PostConverter.convertIPost(post)
         }));
       }),
@@ -60,6 +62,15 @@ export class MapComponent implements OnInit {
     );
 
   }
+
+  getActionType(post: IPost, newPosts: IPost[]): ActionType {
+    let action;
+    newPosts.find((p) => p.id === post.id)
+      ? (action = ActionType.ADD_UPDATE)
+      : (action = ActionType.DELETE);
+    return action;
+  }
+
   showFullPost(post: IPost): void {
 
     for (let i = 0; i < this.posts.length; i++) {
@@ -75,24 +86,31 @@ export class MapComponent implements OnInit {
   }
 
   getFilteredPosts(filter: IFilter) {
-    let tester: boolean = false;
+  this.postService.filterPostsMap(filter)
+  
+  
+  
+  
+  
+    /*  let tester: boolean = false;
     this.postService.filterPosts(filter).subscribe((result) => {
       this.posts = result;
       for (let i = 0; i < this.posts.length; i++) {
       }
 
       this.entities$.forEach(e => {
-        for (let i = 0; i < this.posts.length; i++) {
-          if (e.id == this.posts[i].id.toString()) {
+        this.posts.forEach(p=>{
+          if (e.id == p.id.toString()) {
             tester = true;
           }
-        }
+        })
         if (tester == false) {
           console.log(e.id);
           e.actionType = ActionType.DELETE
         }
         tester = false;
       })
+      this.entities$.forEach(console.log)
     })
-  }
+  */}
 }

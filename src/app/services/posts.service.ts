@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Observable, of, Subscription, combineLatest } from 'rxjs';
+import { Observable, of, Subscription, combineLatest, BehaviorSubject, Subject } from 'rxjs';
 import IPost from '../models/posts';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Router } from '@angular/router';
@@ -11,7 +11,7 @@ import IFilter from '../models/filters';
 })
 export class PostsService {
   private url = 'https://localhost:44349/api/';
-
+  private postsSubject: BehaviorSubject<IPost[]> = new BehaviorSubject<IPost[]>([]);
   subs: Subscription[] = [];
 
   constructor(private http: HttpClient, private router: Router) { }
@@ -63,12 +63,20 @@ export class PostsService {
     });
     return this.http.get<IPost[]>(currentUrl, { headers });
   }
+  getAllPostsMap(): Observable<IPost[]> {
+    this.getAllPosts().subscribe((res) => this.postsSubject.next(res))
+    return this.postsSubject.asObservable();
+  }
 
-  filterPosts(filter: IFilter): Observable<IPost[]> {    
+  filterPosts(filter: IFilter): Observable<IPost[]> {
     const currentUrl = `${this.url}Post/Filter`;
     const headers = new HttpHeaders({
       Authorization: 'Bearer ' + this.getToken(),
     });
     return this.http.post<IPost[]>(currentUrl, filter)
-}
+  }
+
+  filterPostsMap(filter: IFilter){
+    this.filterPosts(filter).subscribe((res) => this.postsSubject.next(res))
+  }
 }
