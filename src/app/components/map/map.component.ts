@@ -10,6 +10,9 @@ import IFilter from 'src/app/models/filters';
 import IPost from 'src/app/models/posts';
 import { PostConverter } from 'src/converters/cesium-converter';
 import { PostsService } from '../../services/posts.service';
+import { PostComponent } from '../post/post.component';
+import { MatDialog } from '@angular/material/dialog';
+import { MapPostComponent } from '../map-post/map-post.component';
 
 @Component({
   selector: 'app-map',
@@ -20,7 +23,8 @@ import { PostsService } from '../../services/posts.service';
 export class MapComponent implements OnInit {
   constructor(
     private viewerConf: ViewerConfiguration,
-    private postService: PostsService
+    private postService: PostsService,
+    public dialog: MatDialog
   ) {
     viewerConf.viewerOptions = {
       selectionIndicator: false,
@@ -51,10 +55,10 @@ export class MapComponent implements OnInit {
     this.entities$ = this.postService.getAllPostsMap().pipe(
       pairwise(),
       map((posts) => {
-        const combine=posts[0].concat(posts[1]);
+        const combine = posts[0].concat(posts[1]);
         return combine.map((post) => ({
           id: post.id.toString(),
-          actionType: this.getActionType(post,posts[1]),
+          actionType: this.getActionType(post, posts[1]),
           entity: PostConverter.convertIPost(post)
         }));
       }),
@@ -78,7 +82,8 @@ export class MapComponent implements OnInit {
         this.selectedPost = this.posts[i];
       }
     }
-    this.showDialog = true;
+    this.openDialog(this.selectedPost);
+    //this.showDialog = true;
     //this.selectedPost = post;
   }
   closeDialog(): void {
@@ -86,26 +91,16 @@ export class MapComponent implements OnInit {
   }
 
   getFilteredPosts(filter: IFilter) {
-  this.postService.filterPostsMap(filter)
-    /*  let tester: boolean = false;
-    this.postService.filterPosts(filter).subscribe((result) => {
-      this.posts = result;
-      for (let i = 0; i < this.posts.length; i++) {
-      }
+    this.postService.filterPostsMap(filter)
+  }
 
-      this.entities$.forEach(e => {
-        this.posts.forEach(p=>{
-          if (e.id == p.id.toString()) {
-            tester = true;
-          }
-        })
-        if (tester == false) {
-          console.log(e.id);
-          e.actionType = ActionType.DELETE
-        }
-        tester = false;
-      })
-      this.entities$.forEach(console.log)
-    })
-  */}
+  openDialog(postUp:IPost) {
+    const dialogRef = this.dialog.open(MapPostComponent,{
+      data: {
+        dataKey: postUp
+      }
+    });
+    dialogRef.afterClosed().subscribe(result => {
+    });
+  }
 }

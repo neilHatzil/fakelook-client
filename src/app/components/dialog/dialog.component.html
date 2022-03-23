@@ -11,15 +11,11 @@
         <span class="like-flex">
             <span class="text-marginer" style="margin-top:1.5vh ;">{{likeAmount}} Likes</span>
             <span>
-                <button mat-icon-button matTooltip="Like" matTooltipPosition="above" (click)="likeUnlike()">
-                    <mat-icon [ngClass]="userliked ? 'btn-like': 'btn-unlike'">favorite</mat-icon>
-                </button>
             </span>
 
         </span>
         <div class="post-text-bg">
             
-            <textarea class="textarea-tag" disabled resize="none;">likes: {{likeAmount}}</textarea>
                 <textarea class="textarea-tag" disabled resize="none;">tags: {{tags}}</textarea>
                 <textarea class="textarea-tag" disabled resize="none;">tagged: {{userTags}}</textarea>
                 <textarea class="textarea-tag" disabled resize="none;">comments:</textarea>

@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Inject, Input, OnInit, Output } from '@angular/core';
 import { Router } from '@angular/router';
 import IComment from 'src/app/models/comments';
 import IPost from 'src/app/models/posts';
@@ -7,6 +7,8 @@ import { AuthService } from 'src/app/services/auth.service';
 import { PostsService } from 'src/app/services/posts.service';
 import { MatDialog } from '@angular/material/dialog';
 import { DialogComponent } from '../dialog/dialog.component';
+import { EditDialogComponent } from '../edit-dialog/edit-dialog.component';
+import {MAT_DIALOG_DATA} from '@angular/material/dialog';
 
 
 @Component({
@@ -22,8 +24,7 @@ export class PostComponent implements OnInit {
   close(): void {
     this.closeDialogEmitter.emit();
   }
-  @Input() onMap: boolean = true;
-  //-------this belongs to map functionality
+
 
   //used to populate post with values
   username: string = "";
@@ -70,7 +71,8 @@ export class PostComponent implements OnInit {
   constructor(private authService: AuthService,
     private postService: PostsService,
     private router: Router,
-    public dialog: MatDialog) { }
+    public dialog: MatDialog,
+    ) {  }
 
   ngOnInit(): void {
     this.addEditButton()
@@ -79,17 +81,15 @@ export class PostComponent implements OnInit {
   openDialog() {
     const dialogRef = this.dialog.open(DialogComponent,{
       data: {
-        dataKey: this.post
+        dataKey: this.post,
+        likes:this.likeAmount
       }
     });
 
     dialogRef.afterClosed().subscribe(result => {
     });
   }
-  
-  notOnMap() {
-    this.onMap = false;
-  }
+
   setups() {
     this.setupTags();
     this.setupUserTags();
@@ -107,7 +107,14 @@ export class PostComponent implements OnInit {
   }
 
   editPost() {
-    this.editing = !this.editing;
+    const dialogRef = this.dialog.open(EditDialogComponent,{
+      data: {
+        dataKey: this.post
+      }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+    });
   }
 
   applyChanges() {

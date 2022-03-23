@@ -11,7 +11,6 @@ import { PostComponent } from '../post/post.component';
   styleUrls: ['./timeline.component.css']
 })
 export class TimelineComponent implements OnInit {
-notTimeline:boolean=false;
 posts:IPost[]=[];
 
 //used to notify posts the content has arrived

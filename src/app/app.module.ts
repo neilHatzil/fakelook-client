@@ -27,6 +27,8 @@ import {MatDialogModule} from '@angular/material/dialog';
 import { DialogComponent } from './components/dialog/dialog.component';
 import {MatButtonModule} from '@angular/material/button';
 import {MAT_DIALOG_DATA} from '@angular/material/dialog';
+import { EditDialogComponent } from './components/edit-dialog/edit-dialog.component';
+import { MapPostComponent } from './components/map-post/map-post.component';
 
 
 
@@ -44,6 +46,8 @@ import {MAT_DIALOG_DATA} from '@angular/material/dialog';
     CommentComponent,
     FilterComponent,
     DialogComponent,
+    EditDialogComponent,
+    MapPostComponent,
     
   ],
   imports: [
