@@ -21,7 +21,7 @@ posts:IPost[]=[];
 
   getFilteredPosts(filter:IFilter){
 this.postService.filterPosts(filter).subscribe((result)=>{
-  this.posts=result;      
+  this.posts=result;  
 })
 
   }

@@ -1,7 +1,7 @@
 <!-- \\\<app-posts-menu></app-posts-menu> -->
 
 <div class="map-flex">
-    <app-filter class="filter-size"></app-filter>
+    <app-filter class="filter-size" (FilterPosts)="getFilteredPosts($event)"></app-filter>
   <div class="map-size">
     <ac-map #map>
       <ac-layer *ngIf="entities$" acFor="let entity of entities$" [context]="this" [debug]="true">

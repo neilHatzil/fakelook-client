@@ -26,7 +26,7 @@
                     [(ngModel)]="userTagString">
                 <button class="post-item" (click)="applyChanges()">Apply</button>
             </span>
-            <app-comment *ngFor="let comment of post.comments ; index as i" [comment]="post.comments[i]">
+            <app-comment *ngFor="let comment of post.comments ; index as i" [setComment]="post.comments[i]">
             </app-comment>
         </div>
         <span *ngIf="isExtended">

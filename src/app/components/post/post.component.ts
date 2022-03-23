@@ -26,9 +26,6 @@ export class PostComponent implements OnInit {
 
   //-------this belongs to map functionality
 
-//this is used to run setup functions
-  @Input() changing: Subject<boolean>=new Subject;
-
   //used to show extended information
   isExtended: boolean = false;
 
@@ -57,7 +54,6 @@ export class PostComponent implements OnInit {
   commentUserTags: string = "";
   post!:IPost;
   @Input() set setPost(value:IPost){
-    //console.log(value);
     
     if(value){
       this.post=value;
@@ -66,26 +62,10 @@ export class PostComponent implements OnInit {
       this.setupUserTags();
     }
   }
-  // = {
-  //   id: 0,
-  //   description: "temp",
-  //   imageSorce: "temp",
-  //   x_Position: 0, y_Position: 0, z_Position: 0,
-  //   date: new Date(),
-  //   comments: [{ id: 0, content: "", user: { id: 0, userName: "temp", password: "temp", name: "temp", address: "temp", age: "temp", workplace: "temp", comments: [], posts: [], likes: [], userTaggedPost: [] }, tags: [], userTaggedComment: [] }],
-  //   likes: null,
-  //   user: null,
-  //   userId: 0,
-  //   tags: [{ content: "first" }, { content: "very nice image! please call me, grandma." }],
-  //   userTaggedPost: []
-  // };
 
   constructor(private authService: AuthService, private postService: PostsService, private router: Router) { }
 
-  ngOnInit(): void {   
-    this.changing.subscribe(v => { 
-      console.log('value is changing', v);
-    });
+  ngOnInit(): void {
     this.addEditButton()
   }
 
@@ -158,32 +138,20 @@ export class PostComponent implements OnInit {
   //used to convert tag model to string for display
   setupTags() {
     
-    // if (this.post.tags != null) {
-
-    //   for (let i = 0; i < this.post.tags.length; i++) {
-    //     this.tags = this.tags + this.post.tags[i].content + ", ";
-    //   }
-    //   this.tagString = this.tags.replace(/,/g, '');
-    // }
-    // else {
-    //   this.tags = "empty";
-    // }
+    if(this.post.tags!=null){
+      for(let i=0;i<this.post.tags.length;i++){
+        this.tags="#"+this.post.tags[i].content+" "+this.tags;
+      }
+    }
   }
 
   //used to convert userTag model to string for display
   setupUserTags() {
-
-//this.post.userTaggedPost?.forEach(console.log);
-    // if (this.post.userTaggedPost != null) {
-    //   //console.log(this.post.userTaggedPost[0], "this log is in post->setUserTags");
-    //   for (let i = 0; i < this.post.userTaggedPost.length; i++) {
-    //     this.userTags = this.userTags + ", " + this.post.userTaggedPost[i].user.userTaggedPost;
-    //   }
-    //   this.userTagString = this.userTags;
-    // }
-    // else {
-    //   this.userTags = "empty";
-    // }
+    if(this.post.userTaggedPost){
+      for(let i=0;i<this.post.userTaggedPost.length;i++){
+        this.userTags="@"+this.post.userTaggedPost[i].user.userName+" "+this.userTags;
+      }
+    }
   }
 
   //used to show extended information
@@ -244,8 +212,6 @@ export class PostComponent implements OnInit {
       }
     }
     commentToSend.userTaggedComment=temparrayUserTagsArray;
-    console.log(commentToSend);
-
      this.postService.makeComment(commentToSend);
   }
 

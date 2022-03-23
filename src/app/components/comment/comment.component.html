@@ -1,3 +1,10 @@
 <div>
-    <textarea class="textarea-comment" style="font-weight:bold" disabled resize="none">{{name}}</textarea>
-    <textarea class="textarea-comment" disabled resize="none">{{comment.content}}</textarea>
+    <textarea class="textarea-comment" style="font-weight:bold" disabled
+        resize="none">{{comment.user.userName}}:</textarea>
+    <textarea class="textarea-comment" disabled resize="none"> {{comment.content}}</textarea>
+    <div *ngIf="tags">
+        <textarea class="textarea-comment" disabled resize="none"> tags: {{tags}}</textarea>
+    </div>
+    <div *ngIf="userTags">
+        <textarea class="textarea-comment" disabled resize="none"> user tags: {{userTags}}</textarea>
+    </div>

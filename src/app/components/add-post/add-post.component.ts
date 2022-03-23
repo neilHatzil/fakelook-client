@@ -26,12 +26,8 @@ export class AddPostComponent implements OnInit {
       Validators.required,
     ]),
     tags: new FormControl('', [
-      Validators.required,
-      Validators.minLength(2),
     ]),
     userTags: new FormControl('', [
-      Validators.required,
-      Validators.minLength(2),
     ]),
   });
 
@@ -42,8 +38,8 @@ export class AddPostComponent implements OnInit {
   submitPost(): void {
 
     navigator.geolocation.getCurrentPosition((data) => {
-      let x:number = data.coords.longitude;
-      let y:number = data.coords.latitude;
+      let x: number = data.coords.longitude;
+      let y: number = data.coords.latitude;
 
       const post: IPost = {
         id: 0,
@@ -54,10 +50,8 @@ export class AddPostComponent implements OnInit {
         z_Position: 0,
         date: new Date(),
         comments: [],
-        //likes: null,
-        //user: this.authService.getUser(),
         userId: Number(this.authService.getUser().id),
-        tags: [], //this.tagSetup()
+        tags: this.tagSetup(),
         userTaggedPost: this.userTagSetup()
       };
       this.postService.makePost(post);
@@ -66,12 +60,16 @@ export class AddPostComponent implements OnInit {
   }
 
   tagSetup(): ITag[] {
-    let tagArray: string[] = this.PostForm.controls['tags'].value.split(" ");
     let returnArray: ITag[] = [];
+
+    if (this.PostForm.controls['tags'].value == '') {
+      return [];
+    }
+    let tagArray: string[] = this.PostForm.controls['tags'].value.split(" ");
     for (let i = 0; i < tagArray.length; i++) {
       returnArray[i] = { content: tagArray[i] };
     }
-    return returnArray;
+    return returnArray
   }
 
   userTagSetup(): IUserTag[] {
