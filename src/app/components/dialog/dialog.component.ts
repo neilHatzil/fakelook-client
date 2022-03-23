@@ -9,8 +9,6 @@ import { MatDialog } from '@angular/material/dialog';
 import { Inject } from '@angular/core';
 import {MAT_DIALOG_DATA} from '@angular/material/dialog';
 
-
-
 @Component({
   selector: 'app-dialog',
   templateUrl: './Dialog.component.html',
@@ -48,19 +46,12 @@ export class DialogComponent implements OnInit {
     private router: Router,
     public dialog: MatDialog,
     @Inject(MAT_DIALOG_DATA) public data:{dataKey: IPost,likes:number}) { 
-      this.post=this.data.dataKey
-      console.log(this.data.likes);
-      
+      this.post=this.data.dataKey      
       this.likeAmount=this.data.likes
-      console.log(this.likeAmount);
-      
     }
 
   ngOnInit(): void {
-    //this.post=this.data        
-    //this.countLikes();
       this.setups();
-
   }
 
   setups() {
@@ -70,13 +61,9 @@ export class DialogComponent implements OnInit {
   }
 
   postValuesSetup() {
-    //username
     if (this.post.user?.userName) {
       this.username = this.post.user?.userName;
     }
-
-    //date
-    //this.date = new Date(this.post.date).toISOString().split("T")[0];
   }
 
  
@@ -161,7 +148,6 @@ export class DialogComponent implements OnInit {
           user: {
             userName: temparrayUserTags[i]
           },
-          /*userId: null, commentId: null, comment: null*/
         }
       }
     }

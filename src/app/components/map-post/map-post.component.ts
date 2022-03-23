@@ -201,9 +201,6 @@ export class MapPostComponent implements OnInit {
   }
 
   addComment() {
-    //comment:string="";
-    //commentTags:string="";
-    //commentUserTags:string="";
     const commentToSend: IComment = {
       content: this.comment,
       userId: Number(this.authService.getUser().id),
@@ -236,7 +233,6 @@ export class MapPostComponent implements OnInit {
           user: {
             userName: temparrayUserTags[i]
           },
-          /*userId: null, commentId: null, comment: null*/
         }
       }
     }

@@ -61,10 +61,8 @@ export class PostComponent implements OnInit {
 
     if (value) {
       this.post = value;
-
       this.countLikes();
       this.setups();
-
     }
   }
 
@@ -213,9 +211,6 @@ export class PostComponent implements OnInit {
   }
 
   addComment() {
-    //comment:string="";
-    //commentTags:string="";
-    //commentUserTags:string="";
     const commentToSend: IComment = {
       content: this.comment,
       userId: Number(this.authService.getUser().id),

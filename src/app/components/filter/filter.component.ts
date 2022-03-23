@@ -61,9 +61,6 @@ export class FilterComponent implements OnInit {
     if( this.FilterForm.controls['taggedUsers'].value==''){
       filter.taggedUsers=null;
     }
-    this.FilterPosts.emit(filter);
-
-    //this.postService.filterPosts(filter);
-    
+    this.FilterPosts.emit(filter);    
   }
 }
