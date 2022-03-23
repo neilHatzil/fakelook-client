@@ -8,8 +8,6 @@ import { PostsService } from 'src/app/services/posts.service';
 import { MatDialog } from '@angular/material/dialog';
 import { DialogComponent } from '../dialog/dialog.component';
 import { EditDialogComponent } from '../edit-dialog/edit-dialog.component';
-import {MAT_DIALOG_DATA} from '@angular/material/dialog';
-
 
 @Component({
   selector: 'app-post',
@@ -24,7 +22,6 @@ export class PostComponent implements OnInit {
   close(): void {
     this.closeDialogEmitter.emit();
   }
-
 
   //used to populate post with values
   username: string = "";
@@ -243,7 +240,6 @@ export class PostComponent implements OnInit {
           user: {
             userName: temparrayUserTags[i]
           },
-          /*userId: null, commentId: null, comment: null*/
         }
       }
     }
