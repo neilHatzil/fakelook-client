@@ -1,59 +1,70 @@
 <div class="display-center full-width">
-    <form class="signing-box" [formGroup]="PostForm" (ngSubmit)="submitPost()">
-      <div class="display-center"><h2>Add post</h2></div>
-    
-      <label for="text">Text</label>
-      <input formControlName="description" type="text" id="text" />
-      <div
-        class="error"
-        *ngIf="
-        PostForm.controls['description'].touched &&
-        PostForm.controls['description'].invalid
-        "
-      >
-      Text not valid
-      </div>
-      
-      <label for="image">Image</label>
-      <input formControlName="image" type="text" id="image" />
-      <div
-        class="error"
-        *ngIf="
-        PostForm.controls['image'].touched &&
-        PostForm.controls['image'].invalid
-        "
-      >
-      Image not valid
-      </div>
+  <form class="signing-box" [formGroup]="PostForm" (ngSubmit)="submitPost()">
+    <div>
+      <img src="../../../assets/LogoFL.png" alt="">
+      <!-- <img src="../../../assets/Logo.jpeg" alt=""> -->
+      <!-- <img src="../../../assets/Logo2.jpeg" alt=""> -->
+    </div>
 
-      <label for="image">Add tags (seperated by spaces)</label>
-      <input formControlName="tags" type="text" id="image" />
-      <div
-        class="error"
-        *ngIf="
-        PostForm.controls['tags'].touched &&
-        PostForm.controls['tags'].invalid
-        "
-      >
-      Tags not valid
-      </div>
+    <div>
+    <!-- <div class="display-center">
 
-      <label for="image">Tag users (seperated by spaces)</label>
-      <input formControlName="userTags" type="text" id="image" />
-      <div
-        class="error"
-        *ngIf="
-        PostForm.controls['userTags'].touched &&
-        PostForm.controls['userTags'].invalid
-        "
-      >
-      User tag not valid
-      </div>
-      <div class="display-center">
-        <button type="submit" class="btn" [disabled]="!PostForm.valid">
-          Post
-        </button>
-      </div>
-    </form>
+      <h2>Login</h2>
+    </div> -->
+
+
+    <!-- <label for="firstName"></label>
+    <input formControlName="userName" placeholder="User Name" type="text" id="userName" />
+    <div class="error" *ngIf="
+          loginForm.controls['userName'].touched &&
+          loginForm.controls['userName'].invalid
+        ">
+      username not valid
+    </div> -->
+<div>
+      <mat-form-field appearance="outline">
+        <mat-label>Description</mat-label>
+        <input formControlName="description" matInput placeholder="Description">
+         <mat-icon matSuffix>perm_identity</mat-icon> 
+         <mat-hint>Min 2 Characters</mat-hint> 
+      </mat-form-field>
+    </div>
+
+    <div>
+      <mat-form-field appearance="outline">
+        <mat-label>Image</mat-label>
+        <input formControlName="image" matInput  placeholder="image">
+         <mat-icon matSuffix>lock</mat-icon> 
+      </mat-form-field>
+    </div>
+
+    <div>
+      <mat-form-field appearance="outline">
+        <mat-label>Tags</mat-label>
+        <input formControlName="tags" matInput  placeholder="Tags">
+         <mat-icon matSuffix>lock</mat-icon> 
+         <mat-hint>Seperated by spaces</mat-hint> 
+      </mat-form-field>
+    </div>
+
+    <div>
+      <mat-form-field appearance="outline">
+        <mat-label>User tags</mat-label>
+        <input formControlName="userTags" matInput  placeholder="User tags">
+         <mat-icon matSuffix>lock</mat-icon> 
+         <mat-hint>Seperated by spaces</mat-hint> 
+      </mat-form-field>
+    </div>
+
+    <div class="display-center">
+      <button type="submit" class="btn-login" [disabled]="!PostForm.valid">
+        Post!
+      </button>
+    </div>
+
+    <!-- <div class="display-center">
+      <button mat-raised-button type="submit" [disabled]="!loginForm.valid">Basic</button>
+    </div> -->
   </div>
-  
+  </form>
+</div>
